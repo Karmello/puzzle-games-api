@@ -6,7 +6,7 @@ require('dotenv').config();
 const router = require('./routes');
 
 
-const { NODE_ENV, API_PORT, MONGODB_HEROKU_URI, MONGODB_LOCAL_URI } = process.env;
+const { NODE_ENV, API_PORT, MONGODB_URI } = process.env;
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 router.get('/', (req, res) => { res.json({ message: 'API Initialized!' }); });
 app.use('/', router);
 
-mongoose.connect(NODE_ENV === 'production' ? MONGODB_HEROKU_URI : MONGODB_LOCAL_URI).then(() => {
+mongoose.connect(MONGODB_URI).then(() => {
   app.listen(API_PORT, () => {
     console.log(`Connected to MongoDB, api running on port ${API_PORT}`);
   });
