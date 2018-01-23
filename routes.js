@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { User } = require('./models');
+const { User, Game } = require('./models');
 
 
 const router = express.Router();
@@ -22,6 +22,13 @@ router.post('/user', (req, res, next) => {
   user.save(err => {
     if (err) return next(err);
     res.send(user);
+  });
+});
+
+router.get('/games', (req, res, next) => {
+  Game.find({}, (err, games) => {
+    if (err) return next(err);
+    if (games) { res.send(games); }
   });
 });
 
