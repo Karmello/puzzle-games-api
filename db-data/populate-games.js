@@ -7,7 +7,7 @@ games.remove({});
 games.insert([
   {
     id: 'BOSS_PUZZLE',
-    name: 'The 15-puzzle',
-    description: 'Also called Gem Puzzle, Boss Puzzle, Game of Fifteen, Mystic Square.'
+    name: 'Boss Puzzle',
+    description: 'This is a sliding puzzle that consists of a frame of square tiles in random order with one tile missing. Also called Gem Puzzle or Mystic Square.'
   }
 ]);
