@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const router = require('./routes');
+const router = express.Router();
+require('./routes')(router);
 
 
 const { NODE_ENV, MONGODB_URI } = process.env;
