@@ -3,6 +3,18 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Workspace\\puzzle-games-api\\db-data"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Workspace\\puzzle-games-api\\models"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Workspace\\puzzle-games-api\\routes"
 		}
 	]
 }
