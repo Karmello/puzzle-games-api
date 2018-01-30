@@ -1,4 +1,4 @@
-const { User, Game, Result } = require('./../models');
+const { User, Game, GameCategory, Result } = require('./../models');
 
 
 module.exports = function(router) {
@@ -41,6 +41,13 @@ module.exports = function(router) {
     Result.find(query, (err, results) => {
       if (err) return next(err);
       if (results) { res.send(results); }
+    });
+  });
+
+  router.get('/game-categories', (req, res, next) => {
+    GameCategory.find({}, (err, gameCategories) => {
+      if (err) return next(err);
+      if (gameCategories) { res.send(gameCategories); }
     });
   });
 }
