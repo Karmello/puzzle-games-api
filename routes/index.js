@@ -1,5 +1,7 @@
 module.exports = function (router) {
 
-  require('./get')(router);
-  require('./post')(router);
+  require('./game-categories')(router);
+  require('./games')(router);
+  require('./results')(router);
+  require('./users')(router);
 }
