@@ -31,12 +31,8 @@ module.exports = function(router) {
 
   router.get('/results/:gameId', (req, res, next) => {
 
-    const parseToInt = ['dimension'];
     const query = { gameId: req.params.gameId };
-
-    for (const key in req.query) {
-      query[`options.${key}`] = parseToInt.indexOf(key) > -1 ? Number(req.query[key]) : req.query[key];
-    }
+    for (const key in req.query) { query[`options.${key}`] = req.query[key]; }
 
     Result.find(query, (err, results) => {
       if (err) return next(err);
