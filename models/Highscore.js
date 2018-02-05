@@ -4,7 +4,7 @@ const Game = require('./Game');
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const ResultSchema = new mongoose.Schema({
+const HighscoreSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   userId: { type: ObjectId, ref: 'User', required: true },
   gameId: { type: ObjectId, ref: 'Game', required: true },
@@ -15,7 +15,7 @@ const ResultSchema = new mongoose.Schema({
   }
 }, { versionKey: false });
 
-ResultSchema.pre('save', function(next) {
+HighscoreSchema.pre('save', function(next) {
   
   if (!this.options) { return next(new Error('req.body.options required !')); }
 
@@ -38,4 +38,4 @@ ResultSchema.pre('save', function(next) {
   });
 });
 
-module.exports = mongoose.model('Result', ResultSchema);
+module.exports = mongoose.model('Highscore', HighscoreSchema);
