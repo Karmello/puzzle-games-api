@@ -15,7 +15,7 @@ const HighscoreSchema = new mongoose.Schema({
   }
 }, { versionKey: false });
 
-HighscoreSchema.pre('save', function(next) {
+HighscoreSchema.pre('validate', function(next) {
   
   if (!this.options) { return next(new Error('req.body.options required !')); }
 
