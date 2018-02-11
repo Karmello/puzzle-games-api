@@ -2,7 +2,6 @@ const conn = new Mongo();
 const db = conn.getDB('puzzle-games');
 const games = db.getCollection('games');
 
-
 games.remove({});
 
 games.insert([
