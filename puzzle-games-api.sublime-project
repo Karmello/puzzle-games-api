@@ -5,16 +5,16 @@
 			"path": "."
 		},
 		{
-			"follow_symlinks": true,
-			"path": "C:\\Workspace\\puzzle-games-api\\db-data"
+			"path": "db-data"
 		},
 		{
-			"follow_symlinks": true,
-			"path": "C:\\Workspace\\puzzle-games-api\\models"
+			"path": "db-scripts"
 		},
 		{
-			"follow_symlinks": true,
-			"path": "C:\\Workspace\\puzzle-games-api\\routes"
+			"path": "models"
+		},
+		{
+			"path": "routes"
 		}
 	]
 }
