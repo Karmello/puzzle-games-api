@@ -1,4 +1,4 @@
-module.exports = [
+const gamesData = [
   {
     id: 'BossPuzzle',
     categoryId: 'sliding',
