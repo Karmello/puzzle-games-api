@@ -3,11 +3,11 @@ db = connect('ds211588.mlab.com:11588/heroku_rpzsr6b5', 'heroku_rpzsr6b5', 'msgh
 
 const gamecategories = db.getCollection('gamecategories');
 gamecategories.remove({});
-gamecategories.insert(load('./../db-data/gamecategories'));
+gamecategories.insert(load('db-data/gamecategories.js'));
 
 const games = db.getCollection('games');
 games.remove({});
-games.insert(load('./../db-data/games'));
+games.insert(load('db-data/games.js'));
 
 const users = db.getCollection('users');
 users.remove({});
