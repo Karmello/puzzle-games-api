@@ -2,6 +2,9 @@ load('db-data/gamecategories.js');
 load('db-data/games.js');
 
 //db = connect('ds211588.mlab.com:11588/heroku_rpzsr6b5', 'heroku_rpzsr6b5', 'msghahln2bgtfrfb5idd674vv6');
+
+console.log(global);
+console.log(window);
 db = connect(process.env.MONGODB_URI);
 
 const gamecategories = db.getCollection('gamecategories');
