@@ -5,13 +5,31 @@ const Game = require('./Game');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const HighscoreSchema = new mongoose.Schema({
-  date: { type: Date, default: Date.now },
-  userId: { type: ObjectId, ref: 'User', required: true },
-  gameId: { type: ObjectId, ref: 'Game', required: true },
+  date: { 
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  userId: {
+    type: ObjectId,
+    ref: 'User',
+    required: true
+  },
+  gameId: {
+    type: ObjectId,
+    ref: 'Game',
+    required: true
+  },
   options: {},
   details: {
-    moves: { type: Number, required: true },
-    seconds: { type: Number, required: true }
+    moves: {
+      type: Number,
+      required: true
+    },
+    seconds: {
+      type: Number,
+      required: true
+    }
   }
 }, { versionKey: false });
 

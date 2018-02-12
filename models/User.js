@@ -3,8 +3,14 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
  fb: {
-  id: String,
-  name: String
+  id: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  }
  }
 }, { versionKey: false });
 

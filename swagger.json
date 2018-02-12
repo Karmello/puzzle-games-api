@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "puzzle-games-api",
+    "contact": {
+      "email": "nogakamil@vp.pl"
+    },
+    "license": {
+      "name": "Repo",
+      "url": "https://github.com/Karmello/puzzle-games-api"
+    }
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "users",
+      "description": "Read-write collection",
+      "externalDocs": {
+        "description": "Code",
+        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/users.js"
+      }
+    },
+    {
+      "name": "game-categories",
+      "description": "Read-only collection",
+      "externalDocs": {
+        "description": "Code",
+        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/game-categories.js"
+      }
+    },
+    {
+      "name": "games",
+      "description": "Read-only collection",
+      "externalDocs": {
+        "description": "Code",
+        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/games.js"
+      }
+    },
+    {
+      "name": "highscores",
+      "description": "Read-write collection",
+      "externalDocs": {
+        "description": "Code",
+        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/highscores.js"
+      }
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Create new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New user",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{fbId}": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get user by Facebook ID",
+        "parameters": [
+          {
+            "name": "fbId",
+            "in": "path",
+            "required": true,
+            "description": "Facebook ID of the user",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/game-categories": {
+      "get": {
+        "tags": ["game-categories"],
+        "summary": "Get all game categories",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GameCategory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games": {
+      "get": {
+        "tags": ["games"],
+        "summary": "Get all games",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Game"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/highscores": {
+      "post": {
+        "tags": ["highscores"],
+        "summary": "Save new highscore",
+        "description": "Checks if result is new highscore and if yes, saves it",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New highscore",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/Highscore"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New highscore is created",
+            "schema": {
+              "$ref": "#/definitions/Highscore"
+            }
+          }
+        }
+      }
+    },
+    "/highscores/{gameId}": {
+      "get": {
+        "tags": ["highscores"],
+        "summary": "Get highscores by gameId",
+        "description": "Gets all highscores for the game specified by id",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the game you want to get results for",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Highscores found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Highscore"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["_id", "fb"],
+      "properties": {
+        "_id": {
+          "$ref": "#/definitions/userId"
+        },
+        "fb": {
+          "required": ["id", "name"],
+          "properties": {
+            "id": {
+              "type": "number",
+              "format": "int64",
+              "unique": true
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "GameCategory": {
+      "required": ["_id", "id", "name"],
+      "properties": {
+        "_id": {
+          "$ref": "#/definitions/gameCategoryId"
+        },
+        "id": {
+          "type": "string",
+          "unique": true
+        },
+        "name": {
+          "type": "string",
+          "unique": true
+        }
+      }
+    },
+    "Game": {
+      "required": ["_id", "id", "name", "category"],
+      "properties": {
+        "_id": {
+          "$ref": "#/definitions/gameId"
+        },
+        "id": {
+          "type": "string",
+          "unique": true
+        },
+        "name": {
+          "type": "string",
+          "unique": true
+        },
+        "category": {
+          "$ref": "#/definitions/gameCategoryId"
+        },
+        "description": {
+          "type": "string"
+        },
+        "options": {
+          "type": "object"
+        }
+      }
+    },
+    "Highscore": {
+      "required": ["_id", "date", "userId", "gameId", "details"],
+      "properties": {
+        "_id": {
+          "$ref": "#/definitions/highscoreId"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userId": {
+          "$ref": "#/definitions/userId"
+        },
+        "gameId": {
+          "$ref": "#/definitions/gameId"
+        },
+        "options": {
+          "type": "object"
+        },
+        "details": {
+          "type": "object",
+          "required": ["moves", "seconds"],
+          "properties": {
+            "moves": {
+              "type": "number",
+              "format": "int32"
+            },
+            "seconds": {
+              "type": "number",
+              "format": "int32"
+            }
+          }
+        }
+      }
+    },
+    "userId": {
+      "type": "string",
+      "format": "byte",
+      "unique": true
+    },
+    "gameId": {
+      "type": "string",
+      "format": "byte",
+      "unique": true
+    },
+    "gameCategoryId": {
+      "type": "string",
+      "format": "byte",
+      "unique": true
+    },
+    "highscoreId": {
+      "type": "string",
+      "format": "byte",
+      "unique": true
+    }
+  }
+}
