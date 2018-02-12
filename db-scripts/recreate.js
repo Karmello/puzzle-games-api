@@ -1,9 +1,6 @@
 load('db-data/gamecategories.js');
 load('db-data/games.js');
 
-//db = connect('ds211588.mlab.com:11588/heroku_rpzsr6b5', 'heroku_rpzsr6b5', 'msghahln2bgtfrfb5idd674vv6');
-db = connect('mongodb://heroku_v9wrbb3g:o5tk2ma705p0ploisufrdepbk5@ds229438.mlab.com:29438/heroku_v9wrbb3g');
-
 const gamecategories = db.getCollection('gamecategories');
 gamecategories.remove({});
 gamecategories.insert(gamecategoriesData);
