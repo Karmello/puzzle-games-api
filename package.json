@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha --timeout 10000 --exit",
-    "postinstall": "npm install --only=dev & npm test"
+    "preinstall": "npm i --only=dev",
+    "postinstall": "npm test"
   },
   "author": "Kamil Noga",
   "license": "ISC",
