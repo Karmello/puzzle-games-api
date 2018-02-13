@@ -48,8 +48,4 @@ mongoose.connect(MONGODB_URI).then(() => {
   });
 }, err => console.log(err));
 
-mongoose.connection.on('close', () => {
-  if (intervalId) { clearInterval(intervalId); }
-});
-
 module.exports = app;
