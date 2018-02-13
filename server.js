@@ -35,7 +35,7 @@ if (NODE_ENV === 'development') {
 
 mongoose.connect(MONGODB_URI).then(() => {
   app.listen(port, () => {
-    console.log(`Connected to MongoDB, api running on port ${port}`);
+    console.log(`Connected to ${MONGODB_URI}, api running on port ${port}`);
   });
 }, err => console.log(err));
 
