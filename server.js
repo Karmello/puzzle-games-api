@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -5,6 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 
+let intervalId;
 const router = express.Router();
 require('./routes')(router);
 
@@ -31,6 +33,13 @@ app.use('/', router);
 
 if (NODE_ENV !== 'production') {
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
+
+if (NODE_ENV !== 'development') {
+  if (intervalId) { clearInterval(intervalId); }
+  intervalId = setInterval(() => {
+    http.get('http://<your app name>.herokuapp.com');
+  }, 300000);
 }
 
 mongoose.connect(MONGODB_URI).then(() => {
