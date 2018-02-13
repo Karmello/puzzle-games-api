@@ -9,7 +9,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 const Game = mongoose.model('Game');
-const { BASE_URL } = process.env;
+const BASE_URL = process.env.BASE_URL;
 
 
 describe('games', () => {
