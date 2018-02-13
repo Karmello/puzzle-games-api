@@ -38,3 +38,5 @@ mongoose.connect(MONGODB_URI).then(() => {
     console.log(`Connected to MongoDB, api running on port ${port}`);
   });
 }, err => console.log(err));
+
+module.exports = app;
