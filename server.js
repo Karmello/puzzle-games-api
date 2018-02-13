@@ -38,7 +38,7 @@ if (NODE_ENV !== 'production') {
 if (NODE_ENV !== 'development') {
   if (intervalId) { clearInterval(intervalId); }
   intervalId = setInterval(() => {
-    http.get('http://<your app name>.herokuapp.com');
+    http.get(process.env.BASE_URL);
   }, 300000);
 }
 
