@@ -9,13 +9,11 @@ const app = require('./../server');
 const should = chai.should();
 chai.use(chaiHttp);
 
-const Game = mongoose.model('Game');
-
 
 describe('games', () => {
   
   beforeEach(done => {
-    Game.remove({}, err => {
+    app.models.Game.remove({}, err => {
       done();
     });
   });

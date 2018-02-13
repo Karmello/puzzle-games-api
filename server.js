@@ -39,4 +39,8 @@ mongoose.connect(MONGODB_URI).then(() => {
   });
 }, err => console.log(err));
 
+app.models = {
+  Game: mongoose.model('Game')
+}
+
 module.exports = app;
