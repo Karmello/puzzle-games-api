@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha --timeout 10000 --exit",
-    "postinstall": "npm test"
+    "postinstall": "[ \"$NODE_ENV\" == staging ] && npm test"
   },
   "author": "Kamil Noga",
   "license": "ISC",
