@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 router.get('/', (req, res) => { res.json({ message: 'API Initialized!' }); });
 app.use('/', router);
 
-if (NODE_ENV === 'development') {
+if (NODE_ENV !== 'production') {
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
