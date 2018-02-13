@@ -7,6 +7,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 const Game = mongoose.model('Game');
+const baseUrl = 'http://localhost:' + process.env.port;
 
 describe('games', () => {
   
@@ -18,7 +19,7 @@ describe('games', () => {
 
   describe('/GET games', () => {
     it('it should GET all games', done => {
-      chai.request(process.env.BASE_URL)
+      chai.request(baseUrl)
       .get('/games')
       .end((err, res) => {
         res.should.have.status(200);
