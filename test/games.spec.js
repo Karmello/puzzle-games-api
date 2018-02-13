@@ -1,4 +1,5 @@
 process.env.PORT = 3002;
+process.env.MONGODB_URI = 'mongodb://heroku_pfxgz66t:9b2o5lucd8n8u4t9s211qcic1d@ds235388.mlab.com:35388/heroku_pfxgz66t';
 
 const mongoose = require('mongoose');
 const chai = require('chai');
