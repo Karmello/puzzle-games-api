@@ -4,9 +4,10 @@
   "description": "api for puzzle games react ui",
   "main": "server.js",
   "scripts": {
+    "preinstall": "npm i -g mocha",
+    "postinstall": "npm test",
     "start": "node server.js",
-    "test": "mocha --timeout 10000",
-    "postinstall": "npm test"
+    "test": "mocha --timeout 10000"
   },
   "author": "Kamil Noga",
   "license": "ISC",
