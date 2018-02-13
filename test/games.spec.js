@@ -8,7 +8,6 @@ chai.use(chaiHttp);
 
 const Game = mongoose.model('Game');
 
-
 describe('games', () => {
   
   beforeEach(done => {
@@ -16,8 +15,6 @@ describe('games', () => {
       done();
     });
   });
-
-  console.log(process.env.BASE_URL);
 
   describe('/GET games', () => {
     it('it should GET all games', done => {

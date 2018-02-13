@@ -10,7 +10,7 @@ require('./routes')(router);
 
 
 const { NODE_ENV, MONGODB_URI } = process.env;
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 
 const app = express();
 
