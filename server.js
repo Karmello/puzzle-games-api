@@ -6,7 +6,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 
-let intervalId;
 const router = express.Router();
 require('./routes')(router);
 
@@ -28,18 +27,11 @@ app.use((req, res, next) => {
   next();
 });
 
-router.get('/', (req, res) => { res.json({ message: 'API Initialized!' }); });
+router.get('/', (req, res) => { res.json({ status: 'OK', swagger: process.env.BASE_URL + '/swagger' }); });
 app.use('/', router);
 
 if (NODE_ENV !== 'production') {
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-}
-
-if (NODE_ENV !== 'development') {
-  if (intervalId) { clearInterval(intervalId); }
-  intervalId = setInterval(() => {
-    http.get(process.env.BASE_URL);
-  }, 300000);
 }
 
 mongoose.connect(MONGODB_URI).then(() => {
