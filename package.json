@@ -4,10 +4,9 @@
   "description": "api for puzzle games react ui",
   "main": "server.js",
   "scripts": {
-    "preinstall": "if-env NODE_ENV=staging npm install --dev",
-    "postinstall": "if-env NODE_ENV=staging && npm test",
     "start": "node server.js",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "postinstall": "if-env NODE_ENV=staging && npm install --dev && npm test"
   },
   "author": "Kamil Noga",
   "license": "ISC",
