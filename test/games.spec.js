@@ -17,6 +17,8 @@ describe('games', () => {
     });
   });
 
+  console.log(process.env.BASE_URL);
+
   describe('/GET games', () => {
     it('it should GET all games', done => {
       chai.request(process.env.BASE_URL)
