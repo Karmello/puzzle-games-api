@@ -16,38 +16,43 @@ module.exports = function(router) {
     
     newHighscore.validate(err => {
       
-      if (err) return next(err);
-
-      const query = { gameId: newHighscore.gameId };
-      for (const key in newHighscore.options) { query[`options.${key}`] = newHighscore.options[key]; }
-
-      Highscore.find(query).sort(SORT_CONFIG).exec((err, highscores) => {
+      if (err) {
+        res.status(400);
+        res.send(err);
         
-        if (err) return next(err);
+      } else {
 
-        new Promise((resolve, reject) => {
-          if (highscores.length < HIGHSCORES_LIMIT) {
-            resolve();
-          } else {
-            for (const highscore of highscores) {
-              if (shouldSaveNewHighscore(newHighscore.details, highscore.details)) {
-                highscores[highscores.length - 1].remove();
-                return resolve();
+        const query = { gameId: newHighscore.gameId };
+        for (const key in newHighscore.options) { query[`options.${key}`] = newHighscore.options[key]; }
+
+        Highscore.find(query).sort(SORT_CONFIG).exec((err, highscores) => {
+          
+          if (err) return next(err);
+
+          new Promise((resolve, reject) => {
+            if (highscores.length < HIGHSCORES_LIMIT) {
+              resolve();
+            } else {
+              for (const highscore of highscores) {
+                if (shouldSaveNewHighscore(newHighscore.details, highscore.details)) {
+                  highscores[highscores.length - 1].remove();
+                  return resolve();
+                }
               }
+              reject();
             }
-            reject();
-          }
 
-        }).then(() => {
-          newHighscore.save({ validateBeforeSave: false }, err => {
-            if (err) return next(err);
-            res.send(newHighscore);
+          }).then(() => {
+            newHighscore.save({ validateBeforeSave: false }, err => {
+              if (err) return next(err);
+              res.send(newHighscore);
+            });
+          }, () => {
+            res.status(204);
+            res.send();
           });
-        }, () => {
-          res.status(204);
-          res.send();
         });
-      });
+      }
     });
   });
 

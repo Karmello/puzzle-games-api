@@ -28,6 +28,16 @@ describe('[highscores]\n', () => {
         done();
       });
     });
+
+    it('should not be able to create new highscore', done => {
+      delete highscoreBody.details.moves;
+      chai.request(process.env.BASE_URL).post('/highscores').send(highscoreBody).end((err, res) => {
+        res.should.have.status(400);
+        res.body.errors.should.have.property('details.moves');
+        res.body.errors['details.moves'].properties.type.should.equal('required');
+        done();
+      });
+    });
   });
 
   describe('GET /highscores/:gameId', () => {
