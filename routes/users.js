@@ -3,7 +3,7 @@ const { User } = require('./../models');
 
 module.exports = function(router) {
 
-  router.post('/users', (req, res, next) => {
+  router.post('/user', (req, res, next) => {
     const user = new User(req.body);
     user.save(err => {
       if (err) {
@@ -22,7 +22,7 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/users/:fbId', (req, res, next) => {
+  router.get('/user/:fbId', (req, res, next) => {
     User.findOne({ 'fb.id': req.params.fbId }, (err, user) => {
       if (err) return next(err);
       if (user) {

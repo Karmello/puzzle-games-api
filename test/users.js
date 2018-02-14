@@ -1,13 +1,13 @@
 describe('[users]\n', () => {
 
-  describe('POST /users', () => {
+  describe('POST /user', () => {
 
     before(done => {
       User.remove({}).then(() => done());
     });
 
     it('should create new user', done => {
-      chai.request(process.env.BASE_URL).post('/users').send(userBody).end((err, res) => {
+      chai.request(process.env.BASE_URL).post('/user').send(userBody).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.fb.id.should.equal(userBody.fb.id);
@@ -17,7 +17,7 @@ describe('[users]\n', () => {
     });
 
     it('should not be able to create new user', done => {
-      chai.request(process.env.BASE_URL).post('/users').send().end((err, res) => {
+      chai.request(process.env.BASE_URL).post('/user').send().end((err, res) => {
         res.should.have.status(400);
         res.body.errors.should.have.property('fb.id');
         res.body.errors.should.have.property('fb.name');
@@ -47,14 +47,14 @@ describe('[users]\n', () => {
     });
   });
 
-  describe('GET /users/:fbId', () => {
+  describe('GET /user/:fbId', () => {
 
     before(done => {
       Promise.all([User.remove({}), new User(userBody).save()]).then(() => done());
     });
 
     it('should fetch user by facebook id', done => {
-      chai.request(process.env.BASE_URL).get('/users/' + userBody.fb.id).end((err, res) => {
+      chai.request(process.env.BASE_URL).get('/user/' + userBody.fb.id).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.fb.id.should.equal(userBody.fb.id);
@@ -64,7 +64,7 @@ describe('[users]\n', () => {
     });
 
     it('should not be able to find user', done => {
-      chai.request(process.env.BASE_URL).get('/users/xyz').end((err, res) => {
+      chai.request(process.env.BASE_URL).get('/user/xyz').end((err, res) => {
         res.should.have.status(404);
         res.body.should.be.empty;
         done();

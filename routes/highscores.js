@@ -10,7 +10,7 @@ const shouldSaveNewHighscore = (nhsDetails, hsDetails) => {
 
 module.exports = function(router) {
 
-  router.post('/highscores', (req, res, next) => {
+  router.post('/highscore', (req, res, next) => {
 
     const newHighscore = new Highscore(req.body);
     

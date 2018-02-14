@@ -17,10 +17,10 @@ describe('[highscores]\n', () => {
     });
   });
 
-  describe('POST /highscores', () => {
+  describe('POST /highscore', () => {
 
     it('should create new highscore', done => {
-      chai.request(process.env.BASE_URL).post('/highscores').send(highscoreBody).end((err, res) => {
+      chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.userId.should.be.eql(highscoreBody.userId.toString());
@@ -31,7 +31,7 @@ describe('[highscores]\n', () => {
 
     it('should not be able to create new highscore', done => {
       delete highscoreBody.details.moves;
-      chai.request(process.env.BASE_URL).post('/highscores').send(highscoreBody).end((err, res) => {
+      chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
         res.should.have.status(400);
         res.body.errors.should.have.property('details.moves');
         res.body.errors['details.moves'].properties.type.should.equal('required');
