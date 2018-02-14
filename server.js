@@ -27,12 +27,12 @@ app.use((req, res, next) => {
   next();
 });
 
-router.get('/', (req, res) => { res.json({ status: 'OK', swagger: process.env.BASE_URL + '/swagger' }); });
-app.use('/', router);
-
 if (NODE_ENV !== 'production') {
+  router.get('/', (req, res) => { res.json({ status: 'OK', docs: process.env.BASE_URL + '/swagger' }); });
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
+
+app.use('/', router);
 
 mongoose.connect(MONGODB_URI).then(() => {
   app.listen(port, () => {
