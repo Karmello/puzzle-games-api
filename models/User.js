@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
  fb: {
   id: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   name: {
     type: String,

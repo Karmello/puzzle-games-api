@@ -6,8 +6,12 @@ module.exports = function(router) {
   router.post('/users', (req, res, next) => {
     const user = new User(req.body);
     user.save(err => {
-      if (err) return next(err);
-      res.send(user);
+      if (err) {
+        res.status(400);
+        res.send(err);
+      } else {
+        res.send(user);
+      }
     });
   });
 

@@ -9,11 +9,11 @@ require('dotenv').config();
 const router = express.Router();
 require('./routes')(router);
 
-
 const { NODE_ENV, MONGODB_URI } = process.env;
 const port = process.env.PORT;
 
 const app = express();
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
