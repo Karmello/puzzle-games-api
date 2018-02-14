@@ -10,7 +10,7 @@ describe('[highscores]\n', () => {
           userId: user._id,
           gameId: res[2]._id,
           options: { mode: 'NUM', dimension: '3' },
-          details: { moves: 100, seconds: 30 }
+          details: { moves: 120, seconds: 30 }
         }
         done();
       });
