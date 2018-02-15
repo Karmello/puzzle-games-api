@@ -22,7 +22,7 @@ module.exports = function(chai) {
     describe('POST /highscore', () => {
 
       it('should create new highscore', done => {
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.userId.should.be.eql(highscoreBody.userId.toString());
@@ -33,7 +33,7 @@ module.exports = function(chai) {
 
       it('should not be able to create new highscore', done => {
         highscoreBody.gameId = '999999999999999999999999';
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.gameId.properties.type.should.equal('invalid');
           done();
@@ -42,7 +42,7 @@ module.exports = function(chai) {
 
       it('should not be able to create new highscore', done => {
         delete highscoreBody.details.moves;
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.should.have.property('details.moves');
           res.body.errors['details.moves'].properties.type.should.equal('required');
@@ -52,7 +52,7 @@ module.exports = function(chai) {
 
       it('should not be able to create new highscore', done => {
         delete highscoreBody.options;
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.options.properties.type.should.equal('required');
           done();
@@ -61,7 +61,7 @@ module.exports = function(chai) {
 
       it('should not be able to create new highscore', done => {
         delete highscoreBody.options.mode;
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.options.properties.type.should.equal('invalid');
           done();
@@ -70,7 +70,7 @@ module.exports = function(chai) {
 
       it('should not be able to create new highscore', done => {
         highscoreBody.options.dimension = 6;
-        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+        chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.options.properties.type.should.equal('invalid');
           done();
@@ -82,7 +82,7 @@ module.exports = function(chai) {
 
       it('should get highscores by game id', done => {
         new Highscore(highscoreBody).save().then(() => {
-          chai.request(process.env.BASE_URL).get('/highscores/' + highscoreBody.gameId).end((err, res) => {
+          chai.request(global.app).get('/highscores/' + highscoreBody.gameId).end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
             res.body.length.should.be.eql(1);
