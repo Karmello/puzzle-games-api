@@ -7,8 +7,7 @@ chai.use(chaiHttp);
 
 before(done => {
 
-  process.env.NODE_ENV = 'test';
-  
+  process.env.NODE_ENV = 'test';  
   global.app = require('./../server');
   Object.assign(global, require('./../models'));
   global.userBody = { fb: { id: '1234567890', name: 'Alan Watts' } };
