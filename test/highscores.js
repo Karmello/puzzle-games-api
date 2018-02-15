@@ -71,7 +71,7 @@ module.exports = function(chai) {
       it('should not be able to create new highscore', done => {
         highscoreBody.options.dimension = 6;
         chai.request(global.app).post('/highscore').send(highscoreBody).end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(400);
           res.body.errors.options.properties.type.should.equal('invalid');
           done();
         });
