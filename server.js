@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 if (NODE_ENV !== 'production') {
-  router.get('/', (req, res) => { res.json({ status: 'OK', docs: req.protocol + '://' + req.get('host') + req.originalUrl + 'swagger' }); });
+  router.get('/', (req, res) => { res.json({ status: 'OK', docs: '//' + req.get('host') + req.originalUrl + 'swagger' }); });
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
