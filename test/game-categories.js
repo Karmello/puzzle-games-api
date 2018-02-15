@@ -1,23 +1,26 @@
-describe('[game-categories]\n', () => {
+module.exports = function() {
 
-  describe('GET /game-categories', () => {
+  describe('[game-categories]\n', () => {
 
-    let count;
+    describe('GET /game-categories', () => {
 
-    before(done => {
-      GameCategory.count({}).then(_count => {
-        count = _count;
-        done();
+      let count;
+
+      before(done => {
+        GameCategory.count({}).then(_count => {
+          count = _count;
+          done();
+        });
       });
-    });
 
-    it('should fetch all game categories', done => {
-      chai.request(process.env.BASE_URL).get('/game-categories').end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-        res.body.length.should.be.eql(count);
-        done();
+      it('should fetch all game categories', done => {
+        chai.request(process.env.BASE_URL).get('/game-categories').end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(count);
+          done();
+        });
       });
     });
   });
-});
+};
