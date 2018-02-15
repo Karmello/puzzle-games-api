@@ -1,6 +1,6 @@
 module.exports = function() {
 
-  describe('[users]\n', () => {
+  describe('[users]', () => {
 
     describe('POST /user', () => {
 

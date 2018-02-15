@@ -1,6 +1,6 @@
 module.exports = function() {
 
-  describe('[game-categories]\n', () => {
+  describe('[game-categories]', () => {
 
     describe('GET /game-categories', () => {
 

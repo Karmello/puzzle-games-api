@@ -1,6 +1,6 @@
 module.exports = function() {
 
-  describe('[highscores]\n', () => {
+  describe('[highscores]', () => {
 
     let highscoreBody;
 
