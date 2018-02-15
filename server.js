@@ -32,7 +32,7 @@ if (NODE_ENV !== 'production') {
   router.get('/', (req, res) => {
     res.json({
       status: 'OK',
-      docs: (req.connection.encrypted ? 'https': 'http') + '://' + req.get('host') + req.originalUrl + 'swagger'
+      docs: (req.secure ? 'https': 'http') + '://' + req.get('host') + req.originalUrl + 'swagger'
     });
   });
   
