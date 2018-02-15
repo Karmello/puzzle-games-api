@@ -3,6 +3,7 @@ const Game = require('./Game');
 
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const Mixed = mongoose.Schema.Types.Mixed;
 
 const HighscoreSchema = new mongoose.Schema({
   date: { 
@@ -18,9 +19,40 @@ const HighscoreSchema = new mongoose.Schema({
   gameId: {
     type: ObjectId,
     ref: 'Game',
-    required: true
+    required: true,
+    validate: {
+      type: 'invalid',
+      validator: function(gameId) {
+        return Game.count({ _id: gameId }).then(count => count)
+      }
+    }
   },
-  options: {},
+  options: {
+    type: Mixed,
+    required: true,
+    validate: {
+      type: 'invalid',
+      validator: function(options) {
+      
+        return Game.findOne({ _id: this.gameId }).then(game => {
+
+          const requiredKeys = Object.keys(game.options);
+
+          if (Object.keys(options).length !== requiredKeys.length) {
+            return false;
+          
+          } else {
+            for (const key of requiredKeys) {
+              if (!options[key] || game.options[key].indexOf(options[key]) === -1) {
+                return false;
+              }
+            }
+            return true;
+          }
+        });
+      }
+    }
+  },
   details: {
     moves: {
       type: Number,
@@ -32,28 +64,5 @@ const HighscoreSchema = new mongoose.Schema({
     }
   }
 }, { versionKey: false });
-
-HighscoreSchema.pre('validate', function(next) {
-  
-  if (!this.options) { return next(new Error('req.body.options required !')); }
-
-  Game.findOne({ _id: this.gameId }, (err, game) => {
-    
-    if (err) return next(err);
-    const keys = Object.keys(game.options);
-    
-    for (const key of keys) {
-      if (!this.options[key] || game.options[key].indexOf(this.options[key]) === -1) {
-        return next(new Error('req.body.options invalid !'));
-      }
-    }
-    
-    for (const key in this.options) {
-      if (keys.indexOf(key) === -1) { delete this.options[key]; }
-    }
-    
-    next();
-  });
-});
 
 module.exports = mongoose.model('Highscore', HighscoreSchema);

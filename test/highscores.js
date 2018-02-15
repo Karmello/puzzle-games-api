@@ -1,11 +1,11 @@
-module.exports = function() {
+module.exports = function(chai) {
 
   describe('[highscores]', () => {
 
     let highscoreBody;
 
     beforeEach(done => {
-      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({})]).then(res => {
+      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({ id: 'BossPuzzle' })]).then(res => {
         const user = new User(userBody);
         user.save().then(() => {
           highscoreBody = {
@@ -32,11 +32,47 @@ module.exports = function() {
       });
 
       it('should not be able to create new highscore', done => {
+        highscoreBody.gameId = '999999999999999999999999';
+        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+          res.should.have.status(400);
+          res.body.errors.gameId.properties.type.should.equal('invalid');
+          done();
+        });
+      });
+
+      it('should not be able to create new highscore', done => {
         delete highscoreBody.details.moves;
         chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
           res.should.have.status(400);
           res.body.errors.should.have.property('details.moves');
           res.body.errors['details.moves'].properties.type.should.equal('required');
+          done();
+        });
+      });
+
+      it('should not be able to create new highscore', done => {
+        delete highscoreBody.options;
+        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+          res.should.have.status(400);
+          res.body.errors.options.properties.type.should.equal('required');
+          done();
+        });
+      });
+
+      it('should not be able to create new highscore', done => {
+        delete highscoreBody.options.mode;
+        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+          res.should.have.status(400);
+          res.body.errors.options.properties.type.should.equal('invalid');
+          done();
+        });
+      });
+
+      it('should not be able to create new highscore', done => {
+        highscoreBody.options.dimension = 6;
+        chai.request(process.env.BASE_URL).post('/highscore').send(highscoreBody).end((err, res) => {
+          res.should.have.status(400);
+          res.body.errors.options.properties.type.should.equal('invalid');
           done();
         });
       });

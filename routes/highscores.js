@@ -15,7 +15,7 @@ module.exports = function(router) {
     const newHighscore = new Highscore(req.body);
     
     newHighscore.validate(err => {
-      
+
       if (err) {
         res.status(400);
         res.send(err);

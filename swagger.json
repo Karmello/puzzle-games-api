@@ -277,7 +277,7 @@
       }
     },
     "Highscore": {
-      "required": ["_id", "date", "userId", "gameId", "details"],
+      "required": ["_id", "date", "userId", "gameId"],
       "properties": {
         "_id": {
           "$ref": "#/definitions/highscoreId"
