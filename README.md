@@ -1,6 +1,3 @@
-### Technologies
-* server - `Node.js (Express)`
-* database - `MongoDB`
 ### Local setup
 * make sure you have `Node.js` and `MongoDB` installed on your system
 * `git clone` repo and `npm install` from root
