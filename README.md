@@ -5,7 +5,7 @@
 * [staging](https://staging-puzzle-games-api.herokuapp.com)
 * [test](https://test-puzzle-games-api.herokuapp.com)
 ### Local setup
-* install 'Node.js'
+* install `Node.js`
 * install `MongoDB` and create database named `puzzle-games`
 * populate database by running `run recreate-db -dev` from root of the project
 * `git clone` repo
