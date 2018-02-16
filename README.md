@@ -2,7 +2,7 @@
 * server - `Node.js (Express)`
 * database - `MongoDB`
 ### Environments
-* [staging](https://staging-puzzle-games-api.herokuapp.com)
+* staging - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
 * [test](https://test-puzzle-games-api.herokuapp.com)
 ### Local setup
 * install `Node.js`
