@@ -9,4 +9,4 @@
 * `git clone` repo and `npm install` from root
 * create `mongod` instance
 * `run recreate-db -dev` from root
-* `nodemon server.js` from root
+* `nodemon server.js` from root & navigate to `localhost:3001`
