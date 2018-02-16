@@ -7,5 +7,5 @@
 * `nodemon server.js` & navigate to `localhost:3001`
 * `npm test` to run tests
 ### Remote environments
-* staging - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
-* test - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
+* STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
+* TEST - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
