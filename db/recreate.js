@@ -1,5 +1,5 @@
-load('db-data/gamecategories.js');
-load('db-data/games.js');
+load('db/gamecategories.js');
+load('db/games.js');
 
 const gamecategories = db.getCollection('gamecategories');
 gamecategories.remove({});
