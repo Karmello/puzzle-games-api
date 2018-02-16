@@ -1,8 +1,8 @@
 ### Local setup
 * make sure you have `Node.js` and `MongoDB` installed on your system
-* `git clone` repo and `npm install` from root
 * create `mongod` instance
-* `run recreate-db -dev` from root
+* `git clone` repo and `npm install` from root
+* `run recreate-db -dev` to create and populate database
 * `nodemon server.js` & navigate to `localhost:3001`
 * `npm test` to run tests
 ### Remote environments
