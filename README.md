@@ -1,3 +1,4 @@
+<img src="https://s3.eu-central-1.amazonaws.com/puzzle-games/logo.jpg" />
 ### Local setup
 * make sure you have `Node.js` and `MongoDB` installed on your system
 * create `mongod` instance
