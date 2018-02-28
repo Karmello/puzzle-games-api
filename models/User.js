@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  avatarUrl: {
+    type: String,
+    required: true
   }
  }
 }, { versionKey: false });
