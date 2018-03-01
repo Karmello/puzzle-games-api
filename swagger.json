@@ -221,7 +221,7 @@
           "$ref": "#/definitions/userId"
         },
         "fb": {
-          "required": ["id", "name", "avatarUrl"],
+          "required": ["id", "name"],
           "properties": {
             "id": {
               "type": "number",

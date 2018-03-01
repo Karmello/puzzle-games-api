@@ -13,8 +13,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   avatarUrl: {
-    type: String,
-    required: true
+    type: String
   }
  }
 }, { versionKey: false });
