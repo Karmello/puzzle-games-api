@@ -17,3 +17,5 @@ const gamesData = [
     options: {}
   }
 ];
+
+module.exports = gamesData;

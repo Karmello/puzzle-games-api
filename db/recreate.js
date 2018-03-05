@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+
 load('db/gamecategories.js');
 load('db/games.js');
 
