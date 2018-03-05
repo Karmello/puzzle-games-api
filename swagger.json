@@ -70,16 +70,16 @@
         }
       }
     },
-    "/user": {
+    "/user/register": {
       "post": {
         "tags": ["[users]"],
-        "summary": "Create new user",
+        "summary": "Registers new user",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "description": "New user",
-            "required": "true",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -98,16 +98,16 @@
         }
       }
     },
-    "/user/{fbId}": {
-      "get": {
+    "/user/login": {
+      "post": {
         "tags": ["[users]"],
-        "summary": "Get user by Facebook ID",
+        "summary": "Tries to login with given credentials",
         "parameters": [
           {
-            "name": "fbId",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "description": "Facebook ID of the user",
+            "description": "Username and password",
             "type": "integer"
           }
         ],
@@ -165,7 +165,7 @@
             "name": "body",
             "in": "body",
             "description": "New highscore",
-            "required": "true",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Highscore"
             }
@@ -214,26 +214,21 @@
   },
   "definitions": {
     "User": {
-      "required": ["_id", "fb"],
+      "required": ["_id", "registeredAt", "username", "password"],
       "properties": {
         "_id": {
           "$ref": "#/definitions/userId"
         },
-        "fb": {
-          "required": ["id", "name"],
-          "properties": {
-            "id": {
-              "type": "number",
-              "format": "int64",
-              "unique": true
-            },
-            "name": {
-              "type": "string"
-            },
-            "avatarUrl": {
-              "type": "string"
-            }
-          }
+        "registeredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "username": {
+          "type": "string",
+          "unique": true
+        },
+        "password": {
+          "type": "string"
         }
       }
     },
