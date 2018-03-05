@@ -6,7 +6,7 @@ const checkAuthorization = require('./../middleware/checkAuthorization');
 
 module.exports = function(router) {
 
-  router.post('/user/register', (req, res, next) => {
+  router.post('/user/register', (req, res) => {
     
     const user = new User(req.body);
     user.registeredAt = Date.now();
@@ -30,13 +30,13 @@ module.exports = function(router) {
 
       if (req.decoded) {
         User.findOne({ _id: req.decoded.userId }, (err, user) => {
-          if (err) { return reject(err); };
+          if (err) { return reject(err); }
           if (user) { resolve({ user, doNotSendToken: true }); } else { reject(); }
         });
 
       } else {
         User.findOne({ username: req.body.username }, (err, user) => {
-          if (err) { return reject(err); };
+          if (err) { return reject(err); }
           if (user) {
             user.comparePasswords(req.body.password, (err, isMatch) => {
               if (isMatch) { resolve({ user }); } else { reject(); }

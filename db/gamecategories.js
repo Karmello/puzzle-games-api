@@ -8,3 +8,5 @@ const gamecategoriesData = [
     name: 'Chess'
   }
 ];
+
+module.exports = gamecategoriesData;
