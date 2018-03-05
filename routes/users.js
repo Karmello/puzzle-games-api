@@ -19,10 +19,23 @@ module.exports = function(router) {
   });
 
   router.post('/user/login', (req, res, next) => {
-    User.findOne(req.body, (err, user) => {
-      if (err) return next(err);
-      if (user) {
-        res.send(user);
+
+    new Promise((resolve, reject) => {
+
+      User.findOne({ username: req.body.username }, (err, user) => {
+        if (err) { return reject(err); };
+        if (user) {
+          user.comparePasswords(req.body.password, (err, isMatch) => {
+            if (isMatch) { resolve(user); } else { reject(); }
+          });
+        } else {
+          reject();
+        }
+      });
+
+    }).then(user => res.send(user), err => {
+      if (err) {
+        next(err);
       } else {
         res.status(400);
         res.send({ errors: { credentials: { message: 'Wrong credentials' } } });
