@@ -1,6 +1,7 @@
 const { Highscore } = require('./../models');
+const checkAuthorization = require('./../middleware/checkAuthorization');
 
-const HIGHSCORES_LIMIT = 5;
+const HIGHSCORES_LIMIT = 10;
 const SORT_CONFIG = { 'details.seconds': 1, 'details.moves': 1, date: 1 };
 
 const shouldSaveNewHighscore = (nhsDetails, hsDetails) => {
@@ -10,7 +11,7 @@ const shouldSaveNewHighscore = (nhsDetails, hsDetails) => {
 
 module.exports = function(router) {
 
-  router.post('/highscore', (req, res, next) => {
+  router.post('/highscore', checkAuthorization, (req, res, next) => {
 
     const newHighscore = new Highscore(req.body);
     
@@ -56,7 +57,7 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/highscores/:gameId', (req, res, next) => {
+  router.get('/highscores/:gameId', checkAuthorization, (req, res, next) => {
 
     const query = { gameId: req.params.gameId };
     for (const key in req.query) { query[`options.${key}`] = req.query[key]; }

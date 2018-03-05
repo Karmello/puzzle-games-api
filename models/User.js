@@ -24,6 +24,11 @@ const UserSchema = new mongoose.Schema({
 }, { versionKey: false });
 
 UserSchema.methods = {
+  toJSON: function() {
+    let user = this.toObject();
+    delete user.password;
+    return user;
+  },
   hashPassword: function(next) {
 
     let SALT_WORK_FACTOR = 10;
