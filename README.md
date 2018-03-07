@@ -1,3 +1,8 @@
+### Technologies
+* [NodeJs](https://nodejs.org) | [Express](https://expressjs.com) | [MongoDB](https://www.mongodb.com) |
+[mongoose](http://mongoosejs.com) | [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) |
+[bcrypt](https://www.npmjs.com/package/bcrypt-nodejs) | [Swagger](https://swagger.io) | [Mocha](https://mochajs.org) |
+[Chai](http://chaijs.com)
 ### Local setup
 * make sure you have `Node.js` and `MongoDB` installed on your system
 * create `mongod` instance
