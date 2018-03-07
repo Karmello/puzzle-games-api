@@ -10,14 +10,6 @@ before(done => {
   process.env.NODE_ENV = 'test';
   global.app = require('./../server');
   Object.assign(global, require('./../models'));
-  
-  global.userBody = {
-    fb: {
-      id: '1234567890',
-      name: 'Alan Watts',
-      avatarUrl: 'image.png'
-    }
-  };
 
   setTimeout(() => {
     console.log();
@@ -25,7 +17,11 @@ before(done => {
   }, 3000);
 });
 
-require('./users')(chai);
-require('./game-categories')(chai);
-require('./games')(chai);
-require('./highscores')(chai);
+require('./gamecategories/gettingAllGameCategories.spec')(chai);
+require('./games/gettingAllGames.spec')(chai);
+require('./users/gettingAllUsers.spec')(chai);
+require('./users/registration.spec')(chai);
+require('./users/logging.spec')(chai);
+require('./highscores/gettingHighscoresByGameId.spec')(chai);
+require('./highscores/postingHighscore.spec')(chai);
+require('./highscores/savingHighscores.spec')(chai);

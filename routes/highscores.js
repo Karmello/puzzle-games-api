@@ -1,7 +1,6 @@
 const { Highscore } = require('./../models');
 const checkAuthorization = require('./../middleware/checkAuthorization');
 
-const HIGHSCORES_LIMIT = 10;
 const SORT_CONFIG = { 'details.seconds': 1, 'details.moves': 1, date: 1 };
 
 const shouldSaveNewHighscore = (nhsDetails, hsDetails) => {
@@ -31,7 +30,7 @@ module.exports = function(router) {
           if (err) return next(err);
 
           new Promise((resolve, reject) => {
-            if (highscores.length < HIGHSCORES_LIMIT) {
+            if (highscores.length < process.env.HIGHSCORES_LIMIT) {
               resolve();
             } else {
               for (const highscore of highscores) {
