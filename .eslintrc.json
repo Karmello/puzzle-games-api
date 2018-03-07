@@ -2,13 +2,19 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "jasmine": true
     },
     "extends": "eslint:recommended",
     "globals": {
         "process": true,
         "load": true,
-        "db": true
+        "db": true,
+        "before": true,
+        "User": true,
+        "GameCategory": true,
+        "Game": true,
+        "Highscore": true
     },
     "rules": {
         "indent": [
