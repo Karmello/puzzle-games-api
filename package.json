@@ -16,7 +16,6 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.2.0",
     "mongoose": "^5.0.1",
-    "mongoose-beautiful-unique-validation": "^7.1.1",
     "nodemon": "^1.14.11",
     "swagger-ui-express": "^2.0.15"
   },
