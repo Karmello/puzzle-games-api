@@ -23,6 +23,8 @@ const UserSchema = new mongoose.Schema({
   }
 }, { versionKey: false });
 
+UserSchema.plugin(beautifyUnique);
+
 UserSchema.methods = {
   toJSON: function() {
     let user = this.toObject();
@@ -59,5 +61,4 @@ UserSchema.pre('save', function(next) {
   this.hashPassword(() => { next(); });
 });
 
-UserSchema.plugin(beautifyUnique);
 module.exports = mongoose.model('User', UserSchema);

@@ -63,8 +63,8 @@ module.exports = function(chai) {
       const credentials = { username: 'AlanWatts', password: 'password' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);
-        //res.body.errors.username.properties.type.should.equal('unique');
-        //res.body.errors.should.not.have.property('password');
+        res.body.errors.username.properties.type.should.equal('unique');
+        res.body.errors.should.not.have.property('password');
         done();
       });
     });
