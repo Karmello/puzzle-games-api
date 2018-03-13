@@ -62,7 +62,6 @@ module.exports = function(chai) {
     it('should not be able to register', done => {
       const credentials = { username: 'AlanWatts', password: 'password' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
-        console.log(res.body);
         res.should.have.status(400);
         res.body.errors.username.properties.type.should.equal('unique');
         res.body.errors.should.not.have.property('password');
