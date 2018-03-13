@@ -13,7 +13,6 @@ module.exports = function(router) {
     
     user.save(err => {
       if (err) {
-        console.log(err);
         res.status(400);
         res.send(err);
       } else {
