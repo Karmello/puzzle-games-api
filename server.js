@@ -9,7 +9,7 @@ const router = express.Router();
 require('./routes')(router);
 
 const { NODE_ENV, MONGODB_URI } = process.env;
-const port = process.env.NODE_ENV !== 'test' ? process.env.PORT : 3002;
+const port = process.env.NODE_ENV !== 'testing' ? process.env.PORT : 3002;
 
 const app = express();
 

@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 before(done => {
 
-  process.env.NODE_ENV = 'test';
+  process.env.NODE_ENV = 'testing';
   global.app = require('./../server');
   Object.assign(global, require('./../models'));
 
