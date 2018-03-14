@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const { Highscore } = require('./../models');
 const checkAuthorization = require('./../middleware/checkAuthorization');
 
@@ -29,11 +30,23 @@ module.exports = function(router) {
           
           if (err) return next(err);
 
-          highscores.count({ username: newHighscore.username }).then(count => console.log(count));
-
           new Promise((resolve, reject) => {
-            if (highscores.length < process.env.HIGHSCORES_LIMIT) {
+            
+            const ownHighscore = _.find(highscores, o => o.userId.toString() === newHighscore.userId.toString());
+            
+            // Current list is not full, no highscore by this user
+            if (highscores.length < process.env.HIGHSCORES_LIMIT && !ownHighscore) {
               resolve();
+            
+            // Current list either full or not full, highscore by this user already exists
+            } else if (ownHighscore) {
+              if (shouldSaveNewHighscore(newHighscore.details, ownHighscore.details)) {
+                ownHighscore.remove().then(resolve);
+              } else {
+                reject();
+              }
+            
+            // Current list is full, no highscore by this user
             } else {
               for (const highscore of highscores) {
                 if (shouldSaveNewHighscore(newHighscore.details, highscore.details)) {
@@ -49,6 +62,7 @@ module.exports = function(router) {
               if (err) return next(err);
               res.send(newHighscore);
             });
+
           }, () => {
             res.status(204);
             res.send();
