@@ -29,14 +29,16 @@ module.exports = function(router) {
           
           if (err) return next(err);
 
+          highscores.count({ username: newHighscore.username }).then(count => console.log(count));
+
           new Promise((resolve, reject) => {
             if (highscores.length < process.env.HIGHSCORES_LIMIT) {
               resolve();
             } else {
               for (const highscore of highscores) {
                 if (shouldSaveNewHighscore(newHighscore.details, highscore.details)) {
-                  highscores[highscores.length - 1].remove();
-                  return resolve();
+                  highscores[highscores.length - 1].remove().then(resolve);
+                  return;
                 }
               }
               reject();
