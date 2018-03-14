@@ -7,9 +7,11 @@
 * make sure you have `Node.js` and `MongoDB` installed on your system
 * create `mongod` instance
 * `git clone` repo and `npm install` from root
-* `run recreate-db -dev` to create and populate database
+* `run db-dev-reset` to create and populate database
+* `run db-dev-import-prod <username> <password>` if you wanna import production db data to your local db
 * `nodemon server.js` & navigate to `localhost:3001`
 * `npm test` to run tests
+
 ### Remote environments
 * STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
 * TEST - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
@@ -18,7 +20,6 @@
 * names - `staging-puzzle-games`, `test-puzzle-games`, `puzzle-games`
 * host - `ds155218.mlab.com`
 * port - `55218`
-* export PRODUCTION database with <br/>`mongodump -h ds155218.mlab.com:55218 -d puzzle-games -u <username> -p <password> -o C:/Workspace/mongodump`
 
 ### Other links
 * ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games-api](https://app.zenhub.com/workspace/o/karmello/puzzle-games-api)

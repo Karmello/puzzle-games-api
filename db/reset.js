@@ -1,7 +1,7 @@
 /* eslint no-undef: 0 */
 
-load('db/gamecategories.js');
-load('db/games.js');
+load('db/data/gamecategories.js');
+load('db/data/games.js');
 
 const gamecategories = db.getCollection('gamecategories');
 gamecategories.remove({});
