@@ -14,5 +14,5 @@
 * STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
 * TEST - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
 ### Other links
-* Jira - [https://puzzle-games.atlassian.net](https://puzzle-games.atlassian.net)
+* ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games-api](https://app.zenhub.com/workspace/o/karmello/puzzle-games-api)
 * Jenkins - [http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
