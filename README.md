@@ -22,5 +22,4 @@
 * port - `55218`
 
 ### Other links
-* ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games-api](https://app.zenhub.com/workspace/o/karmello/puzzle-games-api)
 * Jenkins - [http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
