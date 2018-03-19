@@ -57,15 +57,12 @@
       "get": {
         "tags": ["[users]"],
         "summary": "Get all users",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
-            }
+            "$ref": "#/responses/users"
           }
         }
       }
@@ -75,25 +72,14 @@
         "tags": ["[users]"],
         "summary": "Registers new user",
         "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "New user",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
+          { "$ref": "#/parameters/credentials" }
         ],
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+            "$ref": "#/responses/user"
           }
         }
       }
@@ -101,22 +87,14 @@
     "/user/login": {
       "post": {
         "tags": ["[users]"],
-        "summary": "Tries to login with given credentials",
+        "summary": "Tries to login with either credentials or authentication token",
         "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "Username and password",
-            "type": "integer"
-          }
+          { "$ref": "#/parameters/credentials" },
+          { "$ref": "#/parameters/credentials2" }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+            "$ref": "#/responses/user"
           }
         }
       }
@@ -125,15 +103,12 @@
       "get": {
         "tags": ["[game-categories]"],
         "summary": "Get all game categories",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GameCategory"
-              }
-            }
+            "$ref": "#/responses/game-categories"
           }
         }
       }
@@ -142,15 +117,12 @@
       "get": {
         "tags": ["[games]"],
         "summary": "Get all games",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Game"
-              }
-            }
+            "$ref": "#/responses/games"
           }
         }
       }
@@ -161,13 +133,14 @@
         "summary": "Save new highscore",
         "description": "Checks if result is new highscore and if yes, saves it",
         "parameters": [
+          { "$ref": "#/parameters/x-access-token" },
           {
-            "name": "body",
+            "name": "New highscore",
             "in": "body",
-            "description": "New highscore",
+            "description": "New highscore body which is about to be saved",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Highscore"
+              "$ref": "#/requestBody/highscore"
             }
           }
         ],
@@ -176,10 +149,7 @@
         ],
         "responses": {
           "200": {
-            "description": "New highscore is created",
-            "schema": {
-              "$ref": "#/definitions/Highscore"
-            }
+            "$ref": "#/responses/highscore"
           }
         }
       }
@@ -190,6 +160,7 @@
         "summary": "Get highscores by gameId",
         "description": "Gets all highscores for the game specified by id",
         "parameters": [
+          { "$ref": "#/parameters/x-access-token" },
           {
             "name": "gameId",
             "in": "path",
@@ -200,24 +171,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Highscores found",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Highscore"
-              }
-            }
+            "$ref": "#/responses/highscores"
           }
         }
       }
     }
   },
-  "definitions": {
+  "definitions": [
+    { "$ref": "#/schemas/User" },
+    { "$ref": "#/schemas/Game" },
+    { "$ref": "#/schemas/GameCategory" },
+    { "$ref": "#/schemas/Highscore" }
+  ],
+  "schemas": {
     "User": {
+      "title": "User",
       "required": ["_id", "registeredAt", "username", "password"],
       "properties": {
         "_id": {
-          "$ref": "#/definitions/userId"
+          "$ref": "#/schemas/userId"
         },
         "registeredAt": {
           "type": "string",
@@ -232,11 +204,29 @@
         }
       }
     },
+    "User-no-password": {
+      "title": "User",
+      "required": ["_id", "registeredAt", "username"],
+      "properties": {
+        "_id": {
+          "$ref": "#/schemas/userId"
+        },
+        "registeredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "username": {
+          "type": "string",
+          "unique": true
+        }
+      }
+    },
     "GameCategory": {
+      "title": "GameCategory",
       "required": ["_id", "id", "name"],
       "properties": {
         "_id": {
-          "$ref": "#/definitions/gameCategoryId"
+          "$ref": "#/schemas/gameCategoryId"
         },
         "id": {
           "type": "string",
@@ -249,10 +239,11 @@
       }
     },
     "Game": {
+      "title": "Game",
       "required": ["_id", "id", "name", "category"],
       "properties": {
         "_id": {
-          "$ref": "#/definitions/gameId"
+          "$ref": "#/schemas/gameId"
         },
         "id": {
           "type": "string",
@@ -263,7 +254,7 @@
           "unique": true
         },
         "category": {
-          "$ref": "#/definitions/gameCategoryId"
+          "$ref": "#/schemas/gameCategoryId"
         },
         "description": {
           "type": "string"
@@ -274,37 +265,27 @@
       }
     },
     "Highscore": {
+      "title": "Highscore",
       "required": ["_id", "date", "userId", "gameId", "options", "details"],
       "properties": {
         "_id": {
-          "$ref": "#/definitions/highscoreId"
+          "$ref": "#/schemas/highscoreId"
         },
         "date": {
           "type": "string",
           "format": "date-time"
         },
         "userId": {
-          "$ref": "#/definitions/userId"
+          "$ref": "#/schemas/userId"
         },
         "gameId": {
-          "$ref": "#/definitions/gameId"
+          "$ref": "#/schemas/gameId"
         },
         "options": {
           "type": "object"
         },
         "details": {
-          "type": "object",
-          "required": ["moves", "seconds"],
-          "properties": {
-            "moves": {
-              "type": "number",
-              "format": "int32"
-            },
-            "seconds": {
-              "type": "number",
-              "format": "int32"
-            }
-          }
+          "$ref": "#/schemas/highscoreDetails"
         }
       }
     },
@@ -327,6 +308,131 @@
       "type": "string",
       "format": "byte",
       "unique": true
+    },
+    "highscoreDetails": {
+      "type": "object",
+      "required": ["moves", "seconds"],
+      "properties": {
+        "moves": {
+          "type": "number",
+          "format": "int32"
+        },
+        "seconds": {
+          "type": "number",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "credentials": {
+      "name": "Credentials",
+      "in": "body",
+      "required": true,
+      "description": "Username and password",
+      "schema": {
+        "title": "Credentials",
+        "required": ["username", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "unique": true
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "credentials2": {
+      "name": "Authentication token",
+      "in": "body",
+      "description": "Token received during registration",
+      "schema": {
+        "title": "Authentication token",
+        "required": ["x-access-token"],
+        "properties": {
+          "x-access-token": {
+            "type": "string"
+          }
+        }
+      },
+      "required": true
+    },
+    "x-access-token": {
+      "name": "Authentication token",
+      "in": "headers",
+      "description": "Token received during registration",
+      "required": true
+    }
+  },
+  "requestBody": {
+    "highscore": {
+      "required": ["userId", "gameId", "options", "details"],
+      "properties": {
+        "userId": {
+          "$ref": "#/schemas/userId"
+        },
+        "gameId": {
+          "$ref": "#/schemas/gameId"
+        },
+        "options": {
+          "type": "object"
+        },
+        "details": {
+          "$ref": "#/schemas/highscoreDetails"
+        }
+      }
+    }
+  },
+  "responses": {
+    "user": {
+      "description": "User object with no password",
+      "schema": {
+        "$ref": "#/schemas/User-no-password"
+      }
+    },
+    "users": {
+      "description": "An array of user objects with no password",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/schemas/User-no-password"
+        }
+      }
+    },
+    "game-categories": {
+      "description": "An array of game-category objects",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/schemas/GameCategory"
+        }
+      }
+    },
+    "games": {
+      "description": "An array of game objects",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/schemas/Game"
+        }
+      }
+    },
+    "highscore": {
+      "description": "Highscore object",
+      "schema": {
+        "$ref": "#/schemas/Highscore"
+      }
+    },
+    "highscores": {
+      "description": "An array of highscore objects",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/schemas/Highscore"
+        }
+      }
     }
   }
 }
