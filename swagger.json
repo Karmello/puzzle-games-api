@@ -266,7 +266,7 @@
     },
     "Highscore": {
       "title": "Highscore",
-      "required": ["_id", "date", "userId", "gameId", "options", "details"],
+      "required": ["_id", "date", "username", "gameId", "options", "details"],
       "properties": {
         "_id": {
           "$ref": "#/schemas/highscoreId"
@@ -275,11 +275,11 @@
           "type": "string",
           "format": "date-time"
         },
-        "userId": {
-          "$ref": "#/schemas/userId"
+        "username": {
+          "type": "string"
         },
         "gameId": {
-          "$ref": "#/schemas/gameId"
+          "type": "string"
         },
         "options": {
           "type": "object"

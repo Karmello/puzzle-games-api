@@ -32,7 +32,7 @@ module.exports = function(router) {
 
           new Promise((resolve, reject) => {
             
-            const ownHighscore = _.find(highscores, o => o.userId.toString() === newHighscore.userId.toString());
+            const ownHighscore = _.find(highscores, o => o.username.toString() === newHighscore.username.toString());
             
             // Current list is not full, no highscore by this user
             if (highscores.length < process.env.HIGHSCORES_LIMIT && !ownHighscore) {
