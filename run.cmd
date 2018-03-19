@@ -8,6 +8,10 @@ if "%1" == "db-test-reset" (
   cmd /c "mongo ds155218.mlab.com:55218/test-puzzle-games -u %2 -p %3 < db/reset.js"
 )
 
+if "%1" == "db-dev-export" (
+  cmd /c "mongodump -h localhost:27017 -d puzzle-games -o C:/mongodump"
+)
+
 if "%1" == "db-dev-import-prod" (
   cmd /c "mongo puzzle-games --eval db.dropDatabase()"
   cmd /c "mongodump -h ds155218.mlab.com:55218 -d puzzle-games -u %2 -p %3 -o C:/mongodump"
