@@ -167,6 +167,18 @@
             "required": true,
             "description": "ID of the game you want to get results for",
             "type": "string"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Game mode",
+            "type": "string"
+          },
+          {
+            "name": "dimension",
+            "in": "query",
+            "description": "Game dimension",
+            "type": "string"
           }
         ],
         "responses": {
@@ -260,7 +272,7 @@
           "type": "string"
         },
         "options": {
-          "type": "object"
+          "$ref": "#/schemas/gameOptions"
         }
       }
     },
@@ -282,7 +294,7 @@
           "type": "string"
         },
         "options": {
-          "type": "object"
+          "$ref": "#/schemas/gameOptions"
         },
         "details": {
           "$ref": "#/schemas/highscoreDetails"
@@ -303,6 +315,13 @@
       "type": "string",
       "format": "byte",
       "unique": true
+    },
+    "gameOptions": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string" },
+        "dimension": { "type": "string" }
+      }
     },
     "highscoreId": {
       "type": "string",
@@ -377,7 +396,7 @@
           "$ref": "#/schemas/gameId"
         },
         "options": {
-          "type": "object"
+          "$ref": "#/schemas/gameOptions"
         },
         "details": {
           "$ref": "#/schemas/highscoreDetails"

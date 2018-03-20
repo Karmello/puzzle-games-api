@@ -10,8 +10,8 @@ module.exports = function(chai) {
         chai.request(global.app).post('/user/register').send({ username: 'AlanWatts', password: 'password' }).end((err, res) => {
           token = res.body.token;
           highscoreBody = {
-            userId: res.body.user._id,
-            gameId: game._id,
+            username: res.body.user.username,
+            gameId: game.id,
             options: { mode: 'NUM', dimension: '3' },
             details: { moves: 120, seconds: 30 }
           }
@@ -24,14 +24,14 @@ module.exports = function(chai) {
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
-        res.body.userId.should.be.eql(highscoreBody.userId.toString());
+        res.body.username.should.be.eql(highscoreBody.username.toString());
         res.body.gameId.should.be.eql(highscoreBody.gameId.toString());
         done();
       });
     });
 
     it('should not be able to create new highscore', done => {
-      highscoreBody.gameId = '999999999999999999999999';
+      highscoreBody.gameId = 'wrong-game-id';
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
         res.body.errors.gameId.properties.type.should.equal('invalid');
