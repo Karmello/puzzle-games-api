@@ -15,33 +15,33 @@
   "tags": [
     {
       "name": "[users]",
-      "description": "Read-write collection",
+      "description": "read-write collection",
       "externalDocs": {
-        "description": "Code",
+        "description": "code",
         "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/users.js"
       }
     },
     {
       "name": "[game-categories]",
-      "description": "Read-only collection",
+      "description": "read-only collection",
       "externalDocs": {
-        "description": "Code",
+        "description": "code",
         "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/game-categories.js"
       }
     },
     {
       "name": "[games]",
-      "description": "Read-only collection",
+      "description": "read-only collection",
       "externalDocs": {
-        "description": "Code",
+        "description": "code",
         "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/games.js"
       }
     },
     {
       "name": "[highscores]",
-      "description": "Read-write collection",
+      "description": "read-write collection",
       "externalDocs": {
-        "description": "Code",
+        "description": "code",
         "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/highscores.js"
       }
     }
@@ -56,7 +56,7 @@
     "/users": {
       "get": {
         "tags": ["[users]"],
-        "summary": "Get all users",
+        "summary": "gets all users",
         "parameters": [
           { "$ref": "#/parameters/x-access-token" }
         ],
@@ -70,7 +70,7 @@
     "/user/register": {
       "post": {
         "tags": ["[users]"],
-        "summary": "Registers new user",
+        "summary": "registers new user",
         "parameters": [
           { "$ref": "#/parameters/credentials" }
         ],
@@ -79,7 +79,10 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/user"
+            "description": "authentication token and user object (no password)",
+            "schema": {
+              "$ref": "#/schemas/authenticationResponse"
+            }
           }
         }
       }
@@ -87,14 +90,17 @@
     "/user/login": {
       "post": {
         "tags": ["[users]"],
-        "summary": "Tries to login with either credentials or authentication token",
+        "summary": "tries to login with either credentials or authentication token",
         "parameters": [
           { "$ref": "#/parameters/credentials" },
           { "$ref": "#/parameters/credentials2" }
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/user"
+            "description": "authentication token (if logged in with username and password) and user object (no password)",
+            "schema": {
+              "$ref": "#/schemas/authenticationResponse"
+            }
           }
         }
       }
@@ -102,7 +108,7 @@
     "/game-categories": {
       "get": {
         "tags": ["[game-categories]"],
-        "summary": "Get all game categories",
+        "summary": "gets all game categories",
         "parameters": [
           { "$ref": "#/parameters/x-access-token" }
         ],
@@ -116,7 +122,7 @@
     "/games": {
       "get": {
         "tags": ["[games]"],
-        "summary": "Get all games",
+        "summary": "gets all games",
         "parameters": [
           { "$ref": "#/parameters/x-access-token" }
         ],
@@ -130,19 +136,11 @@
     "/highscore": {
       "post": {
         "tags": ["[highscores]"],
-        "summary": "Save new highscore",
-        "description": "Checks if result is new highscore and if yes, saves it",
+        "summary": "saves new highscore",
+        "description": "checks if new result can be saved as highscore and if yes, does that",
         "parameters": [
           { "$ref": "#/parameters/x-access-token" },
-          {
-            "name": "New highscore",
-            "in": "body",
-            "description": "New highscore body which is about to be saved",
-            "required": true,
-            "schema": {
-              "$ref": "#/requestBody/highscore"
-            }
-          }
+          { "$ref": "#/parameters/highscore" }
         ],
         "produces": [
           "application/json"
@@ -157,29 +155,29 @@
     "/highscores/{gameId}": {
       "get": {
         "tags": ["[highscores]"],
-        "summary": "Get highscores by gameId",
-        "description": "Gets all highscores for the game specified by id",
+        "summary": "gets highscores by gameId",
         "parameters": [
           { "$ref": "#/parameters/x-access-token" },
-          {
-            "name": "gameId",
-            "in": "path",
-            "required": true,
-            "description": "ID of the game you want to get results for",
-            "type": "string"
-          },
-          {
-            "name": "mode",
-            "in": "query",
-            "description": "Game mode",
-            "type": "string"
-          },
-          {
-            "name": "dimension",
-            "in": "query",
-            "description": "Game dimension",
-            "type": "string"
+          { "$ref": "#/parameters/gameId" },
+          { "$ref": "#/parameters/gameMode" },
+          { "$ref": "#/parameters/gameDimension" }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/highscores"
           }
+        }
+      }
+    },
+    "/highscore/{gameId}": {
+      "get": {
+        "tags": ["[highscores]"],
+        "summary": "gets the best highscore by gameId",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" },
+          { "$ref": "#/parameters/gameId" },
+          { "$ref": "#/parameters/gameMode" },
+          { "$ref": "#/parameters/gameDimension" }
         ],
         "responses": {
           "200": {
@@ -341,16 +339,29 @@
           "format": "int32"
         }
       }
+    },
+    "authenticationResponse": {
+      "properties": {
+        "x-access-token": {
+          "$ref": "#/schemas/x-access-token"
+        },
+        "user": {
+          "$ref": "#/schemas/User-no-password"
+        }
+      }
+    },
+    "x-access-token": {
+      "type": "string"
     }
   },
   "parameters": {
     "credentials": {
-      "name": "Credentials",
+      "name": "credentials",
       "in": "body",
       "required": true,
-      "description": "Username and password",
+      "description": "username and password",
       "schema": {
-        "title": "Credentials",
+        "title": "credentials",
         "required": ["username", "password"],
         "properties": {
           "username": {
@@ -364,25 +375,53 @@
       }
     },
     "credentials2": {
-      "name": "Authentication token",
+      "name": "authentication token",
       "in": "body",
-      "description": "Token received during registration",
+      "description": "token received during registration",
       "schema": {
-        "title": "Authentication token",
+        "title": "authentication token",
         "required": ["x-access-token"],
         "properties": {
           "x-access-token": {
-            "type": "string"
+            "$ref": "#/schemas/x-access-token"
           }
         }
       },
       "required": true
     },
     "x-access-token": {
-      "name": "Authentication token",
+      "name": "x-access-token",
       "in": "headers",
-      "description": "Token received during registration",
+      "description": "token received during registration",
       "required": true
+    },
+    "gameId": {
+      "name": "gameId",
+      "in": "path",
+      "required": true,
+      "description": "not mongoose _id !",
+      "type": "string"
+    },
+    "gameMode": {
+      "name": "mode",
+      "in": "query",
+      "description": "game mode",
+      "type": "string"
+    },
+    "gameDimension": {
+      "name": "dimension",
+      "in": "query",
+      "description": "game dimension",
+      "type": "string"
+    },
+    "highscore": {
+      "name": "highscore",
+      "in": "body",
+      "description": "new highscore body which is about to be saved",
+      "required": true,
+      "schema": {
+        "$ref": "#/requestBody/highscore"
+      }
     }
   },
   "requestBody": {
@@ -405,14 +444,8 @@
     }
   },
   "responses": {
-    "user": {
-      "description": "User object with no password",
-      "schema": {
-        "$ref": "#/schemas/User-no-password"
-      }
-    },
     "users": {
-      "description": "An array of user objects with no password",
+      "description": "an array of user objects with no password",
       "schema": {
         "type": "array",
         "items": {
@@ -421,7 +454,7 @@
       }
     },
     "game-categories": {
-      "description": "An array of game-category objects",
+      "description": "an array of game-category objects",
       "schema": {
         "type": "array",
         "items": {
@@ -430,7 +463,7 @@
       }
     },
     "games": {
-      "description": "An array of game objects",
+      "description": "an array of game objects",
       "schema": {
         "type": "array",
         "items": {
@@ -439,13 +472,13 @@
       }
     },
     "highscore": {
-      "description": "Highscore object",
+      "description": "highscore object",
       "schema": {
         "$ref": "#/schemas/Highscore"
       }
     },
     "highscores": {
-      "description": "An array of highscore objects",
+      "description": "an array of highscore objects",
       "schema": {
         "type": "array",
         "items": {
