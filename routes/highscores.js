@@ -82,4 +82,20 @@ module.exports = function(router) {
       if (highscores) { res.send(highscores); }
     });
   });
+
+  router.get('/highscore/:gameId', checkAuthorization, (req, res, next) => {
+
+    const query = { gameId: req.params.gameId };
+    for (const key in req.query) { query[`options.${key}`] = req.query[key]; }
+
+    Highscore.find(query).sort(SORT_CONFIG).limit(1).exec((err, highscores) => {
+      if (err) return next(err);
+      if (highscores.length === 1) {
+        res.send(highscores[0]);
+      } else {
+        res.status(204);
+        res.send();
+      }
+    });
+  });
 }
