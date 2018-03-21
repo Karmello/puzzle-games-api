@@ -19,7 +19,18 @@ const GameSchema = new mongoose.Schema({
     required: true,
     ref: 'GameCategory'
   },
-  description: String,
+  description: {
+    type: String,
+    required: true
+  },
+  info: {
+    type: String,
+    required: true
+  },
+  link: {
+    type: String,
+    required: true
+  },
   options: {}
 }, { versionKey: false });
 

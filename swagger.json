@@ -250,7 +250,7 @@
     },
     "Game": {
       "title": "Game",
-      "required": ["_id", "id", "name", "category"],
+      "required": ["_id", "id", "name", "category", "description", "info", "link"],
       "properties": {
         "_id": {
           "$ref": "#/schemas/gameId"
@@ -267,6 +267,12 @@
           "$ref": "#/schemas/gameCategoryId"
         },
         "description": {
+          "type": "string"
+        },
+        "info": {
+          "type": "string"
+        },
+        "link": {
           "type": "string"
         },
         "options": {
@@ -391,7 +397,7 @@
     },
     "x-access-token": {
       "name": "x-access-token",
-      "in": "headers",
+      "in": "header",
       "description": "token received during registration",
       "required": true
     },
