@@ -32,7 +32,7 @@ module.exports = function(router) {
 
           new Promise((resolve, reject) => {
             
-            const ownHighscore = _.find(highscores, o => o.userId.toString() === newHighscore.userId.toString());
+            const ownHighscore = _.find(highscores, o => o.username.toString() === newHighscore.username.toString());
             
             // Current list is not full, no highscore by this user
             if (highscores.length < process.env.HIGHSCORES_LIMIT && !ownHighscore) {
@@ -80,6 +80,22 @@ module.exports = function(router) {
     Highscore.find(query).sort(SORT_CONFIG).exec((err, highscores) => {
       if (err) return next(err);
       if (highscores) { res.send(highscores); }
+    });
+  });
+
+  router.get('/highscore/:gameId', checkAuthorization, (req, res, next) => {
+
+    const query = { gameId: req.params.gameId };
+    for (const key in req.query) { query[`options.${key}`] = req.query[key]; }
+
+    Highscore.find(query).sort(SORT_CONFIG).limit(1).exec((err, highscores) => {
+      if (err) return next(err);
+      if (highscores.length === 1) {
+        res.send(highscores[0]);
+      } else {
+        res.status(204);
+        res.send();
+      }
     });
   });
 }

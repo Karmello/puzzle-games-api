@@ -11,19 +11,19 @@ const HighscoreSchema = new mongoose.Schema({
     default: Date.now,
     required: true
   },
-  userId: {
-    type: ObjectId,
+  username: {
+    type: String,
     ref: 'User',
     required: true
   },
   gameId: {
-    type: ObjectId,
+    type: String,
     ref: 'Game',
     required: true,
     validate: {
       type: 'invalid',
       validator: function(gameId) {
-        return Game.count({ _id: gameId }).then(count => count)
+        return Game.count({ id: gameId }).then(count => count)
       }
     }
   },
@@ -34,7 +34,7 @@ const HighscoreSchema = new mongoose.Schema({
       type: 'invalid',
       validator: function(options) {
       
-        return Game.findOne({ _id: this.gameId }).then(game => {
+        return Game.findOne({ id: this.gameId }).then(game => {
 
           const requiredKeys = Object.keys(game.options);
 

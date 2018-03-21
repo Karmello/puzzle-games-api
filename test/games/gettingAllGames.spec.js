@@ -2,17 +2,20 @@ module.exports = function(chai) {
 
   describe('GET /games', () => {
 
-    let count;
+    let count, token;
 
     before(done => {
-      Game.count({}).then(_count => {
-        count = _count;
-        done();
+      Promise.all([Game.count({}), User.remove({})]).then(res => {
+        count = res[0];
+        chai.request(global.app).post('/user/register').send({ username: 'AlanWatts', password: 'password' }).end((err, res) => {
+          token = res.body.token;
+          done();
+        });
       });
     });
 
     it('should fetch all games', done => {
-      chai.request(global.app).get('/games').end((err, res) => {
+      chai.request(global.app).get('/games').set('x-access-token', token).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('array');
         res.body.length.should.be.eql(count);
