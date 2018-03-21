@@ -14,14 +14,6 @@
   "basePath": "/",
   "tags": [
     {
-      "name": "[users]",
-      "description": "read-write collection",
-      "externalDocs": {
-        "description": "code",
-        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/users.js"
-      }
-    },
-    {
       "name": "[game-categories]",
       "description": "read-only collection",
       "externalDocs": {
@@ -35,6 +27,14 @@
       "externalDocs": {
         "description": "code",
         "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/games.js"
+      }
+    },
+    {
+      "name": "[users]",
+      "description": "read-write collection",
+      "externalDocs": {
+        "description": "code",
+        "url": "https://github.com/Karmello/puzzle-games-api/blob/master/routes/users.js"
       }
     },
     {
@@ -53,6 +53,40 @@
     "application/json"
   ],
   "paths": {
+    "/game-categories": {
+      "get": {
+        "tags": ["[game-categories]"],
+        "summary": "gets all game categories",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/game-categories"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
+          }
+        }
+      }
+    },
+    "/games": {
+      "get": {
+        "tags": ["[games]"],
+        "summary": "gets all games",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/games"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": ["[users]"],
@@ -63,6 +97,9 @@
         "responses": {
           "200": {
             "$ref": "#/responses/users"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
           }
         }
       }
@@ -83,6 +120,9 @@
             "schema": {
               "$ref": "#/schemas/authenticationResponse"
             }
+          },
+          "400": {
+            "description": "Validation failed"
           }
         }
       }
@@ -92,7 +132,6 @@
         "tags": ["[users]"],
         "summary": "tries to login with either credentials or authentication token",
         "parameters": [
-          { "$ref": "#/parameters/credentials" },
           { "$ref": "#/parameters/credentials2" }
         ],
         "responses": {
@@ -101,34 +140,9 @@
             "schema": {
               "$ref": "#/schemas/authenticationResponse"
             }
-          }
-        }
-      }
-    },
-    "/game-categories": {
-      "get": {
-        "tags": ["[game-categories]"],
-        "summary": "gets all game categories",
-        "parameters": [
-          { "$ref": "#/parameters/x-access-token" }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/responses/game-categories"
-          }
-        }
-      }
-    },
-    "/games": {
-      "get": {
-        "tags": ["[games]"],
-        "summary": "gets all games",
-        "parameters": [
-          { "$ref": "#/parameters/x-access-token" }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/responses/games"
+          },
+          "400": {
+            "$ref": "#/responses/wrongCredentials"
           }
         }
       }
@@ -148,6 +162,12 @@
         "responses": {
           "200": {
             "$ref": "#/responses/highscore"
+          },
+          "204": {
+            "description": "new result is not good enough to be saved on highscores list"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
           }
         }
       }
@@ -165,6 +185,9 @@
         "responses": {
           "200": {
             "$ref": "#/responses/highscores"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
           }
         }
       }
@@ -182,15 +205,21 @@
         "responses": {
           "200": {
             "$ref": "#/responses/highscores"
+          },
+          "204": {
+            "description": "no highscores found"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
           }
         }
       }
     }
   },
   "definitions": [
-    { "$ref": "#/schemas/User" },
-    { "$ref": "#/schemas/Game" },
     { "$ref": "#/schemas/GameCategory" },
+    { "$ref": "#/schemas/Game" },
+    { "$ref": "#/schemas/User" },
     { "$ref": "#/schemas/Highscore" }
   ],
   "schemas": {
@@ -206,8 +235,7 @@
           "format": "date-time"
         },
         "username": {
-          "type": "string",
-          "unique": true
+          "$ref": "#/schemas/username"
         },
         "password": {
           "type": "string"
@@ -226,8 +254,7 @@
           "format": "date-time"
         },
         "username": {
-          "type": "string",
-          "unique": true
+          "$ref": "#/schemas/username"
         }
       }
     },
@@ -292,7 +319,7 @@
           "format": "date-time"
         },
         "username": {
-          "type": "string"
+          "$ref": "#/schemas/username"
         },
         "gameId": {
           "type": "string"
@@ -308,6 +335,10 @@
     "userId": {
       "type": "string",
       "format": "byte",
+      "unique": true
+    },
+    "username": {
+      "type": "string",
       "unique": true
     },
     "gameId": {
@@ -365,14 +396,12 @@
       "name": "credentials",
       "in": "body",
       "required": true,
-      "description": "username and password",
+      "description": "username + password",
       "schema": {
         "title": "credentials",
-        "required": ["username", "password"],
         "properties": {
           "username": {
-            "type": "string",
-            "unique": true
+            "$ref": "#/schemas/username"
           },
           "password": {
             "type": "string"
@@ -381,19 +410,24 @@
       }
     },
     "credentials2": {
-      "name": "authentication token",
+      "name": "credentials",
       "in": "body",
-      "description": "token received during registration",
+      "required": true,
+      "description": "username + password or authentication token",
       "schema": {
-        "title": "authentication token",
-        "required": ["x-access-token"],
+        "title": "credentials",
         "properties": {
-          "x-access-token": {
+          "username": {
+            "$ref": "#/schemas/username"
+          },
+          "password": {
+            "type": "string"
+          },
+          "token": {
             "$ref": "#/schemas/x-access-token"
           }
         }
-      },
-      "required": true
+      }
     },
     "x-access-token": {
       "name": "x-access-token",
@@ -432,10 +466,10 @@
   },
   "requestBody": {
     "highscore": {
-      "required": ["userId", "gameId", "options", "details"],
+      "required": ["username", "gameId", "options", "details"],
       "properties": {
-        "userId": {
-          "$ref": "#/schemas/userId"
+        "username": {
+          "$ref": "#/schemas/username"
         },
         "gameId": {
           "$ref": "#/schemas/gameId"
@@ -491,6 +525,12 @@
           "$ref": "#/schemas/Highscore"
         }
       }
+    },
+    "unauthorized": {
+      "description": "authorization failure"
+    },
+    "wrongCredentials": {
+      "description": "wrong credentials"
     }
   }
 }
