@@ -13,7 +13,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to fetch users', done => {
+    it('should return 401', done => {
       chai.request(global.app).get('/users').end((err, res) => {
         res.should.have.status(401);
         res.text.should.equal('You are not authorized to get the resource you have requested.');
@@ -21,7 +21,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should fetch all users', done => {
+    it('should return 200 and an array of length 1', done => {
       chai.request(global.app).get('/users').set('x-access-token', token).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('array');

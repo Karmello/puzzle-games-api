@@ -13,7 +13,7 @@ module.exports = function(chai) {
       });
     });
     
-    it('should login', done => {
+    it('should return 200 and user with no password + token', done => {
       const credentials = { username: 'AlanWatts', password: 'password' };
       chai.request(global.app).post('/user/login').send(credentials).end((err, res) => {
         res.should.have.status(200);
@@ -24,7 +24,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should login', done => {
+    it('should return 200 and user with no password', done => {
       chai.request(global.app).post('/user/login').send({ token }).end((err, res) => {
         res.should.have.status(200);
         res.body.should.not.have.property('token');
@@ -34,7 +34,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to login', done => {
+    it('should return 400 and wrong credentials error', done => {
       chai.request(global.app).post('/user/login').send({ username: '', password: '' }).end((err, res) => {
         res.should.have.status(400);
         res.body.errors.credentials.message.should.equal('Wrong credentials');
@@ -42,7 +42,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to login', done => {
+    it('should return 400 and wrong credentials error', done => {
       chai.request(global.app).post('/user/login').send({ username: 'Karmello', password: 'password' }).end((err, res) => {
         res.should.have.status(400);
         res.body.errors.credentials.message.should.equal('Wrong credentials');
@@ -50,7 +50,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to login', done => {
+    it('should return 400 and wrong credentials error', done => {
       chai.request(global.app).post('/user/login').send({ token: 'some_invalid_token' }).end((err, res) => {
         res.should.have.status(400);
         res.body.errors.credentials.message.should.equal('Wrong credentials');

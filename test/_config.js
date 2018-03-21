@@ -23,5 +23,6 @@ require('./users/gettingAllUsers.spec')(chai);
 require('./users/registration.spec')(chai);
 require('./users/logging.spec')(chai);
 require('./highscores/gettingHighscoresByGameId.spec')(chai);
+require('./highscores/gettingBestHighscore.spec')(chai);
 require('./highscores/postingHighscore.spec')(chai);
 require('./highscores/savingHighscores.spec')(chai);

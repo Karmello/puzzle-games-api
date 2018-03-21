@@ -14,7 +14,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should fetch all game categories', done => {
+    it('should return 200 and an array with proper length', done => {
       chai.request(global.app).get('/game-categories').set('x-access-token', token).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('array');
