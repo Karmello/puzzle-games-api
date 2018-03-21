@@ -15,8 +15,7 @@ const gamesData = [
         '5'
       ]
     },
-    'info' : 'The aim of the game is to get all square tiles back in order, either so that the picture is restored or so that the numbers are in numerical order from left to right, top to bottom with the space at the bottom right.',
-    'link' : 'https://en.wikipedia.org/wiki/15_puzzle'
+    'info' : 'The aim of the game is to get all square tiles back in order, either so that the picture is restored or so that the numbers are in numerical order from left to right, top to bottom with the space at the bottom right.'
   },
   {
     'id' : 'EightQueens',
@@ -24,8 +23,7 @@ const gamesData = [
     'name' : 'Eight Queens',
     'description' : 'The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard so that no two queens threaten each other.',
     'options' : {},
-    'info' : 'The challenge is to place eight queens on the board such that no queen is attacking any of the others. For those not familiar with chess pieces, the queen is able to attack any square on the same row, any square on the same column and also any square on either of the diagonals.',
-    'link' : 'https://en.wikipedia.org/wiki/Eight_queens_puzzle'
+    'info' : 'The challenge is to place eight queens on the board such that no queen is attacking any of the others. For those not familiar with chess pieces, the queen is able to attack any square on the same row, any square on the same column and also any square on either of the diagonals.'
   }
 ];
 

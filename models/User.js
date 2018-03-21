@@ -15,7 +15,6 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'is required'],
-    //unique: 'already taken',
     validate: [stringValidators.noSpecialChars, stringValidators.noMultipleWords, stringValidators.length(4, 25)]
   },
   password: {
