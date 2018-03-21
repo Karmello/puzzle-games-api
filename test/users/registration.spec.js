@@ -6,7 +6,7 @@ module.exports = function(chai) {
       User.remove({}).then(() => done());
     });
 
-    it('should not be able to register', done => {
+    it('should return 400 and username + password required errors', done => {
       const credentials = { username: '', password: '' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);
@@ -16,7 +16,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to register', done => {
+    it('should return 400 and username special_chars_found error', done => {
       const credentials = { username: '!@#$%^&*()', password: '!@#$%^&*()' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);
@@ -26,7 +26,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to register', done => {
+    it('should return 400 and username + password multiple_words_found errors', done => {
       const credentials = { username: 'multiple words', password: 'multiple words' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);
@@ -36,7 +36,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to register', done => {
+    it('should return 400 and username + password wrong_length error', done => {
       const credentials = { username: 'abc', password: 'abc' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);
@@ -46,7 +46,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should register new user', done => {
+    it('should return 200 and newly created user', done => {
       const credentials = { username: 'AlanWatts', password: 'password' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(200);
@@ -59,7 +59,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to register', done => {
+    it('should return 400 and username unique error', done => {
       const credentials = { username: 'AlanWatts', password: 'password' };
       chai.request(global.app).post('/user/register').send(credentials).end((err, res) => {
         res.should.have.status(400);

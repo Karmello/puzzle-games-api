@@ -20,7 +20,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should create new highscore', done => {
+    it('should return 200 and saved result', done => {
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -30,7 +30,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to create new highscore', done => {
+    it('should return 400 and gameId invalid error', done => {
       highscoreBody.gameId = 'wrong-game-id';
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
@@ -39,7 +39,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to create new highscore', done => {
+    it('should return 400 and details.moves required error', done => {
       delete highscoreBody.details.moves;
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
@@ -49,7 +49,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to create new highscore', done => {
+    it('should return 400 and options required error', done => {
       delete highscoreBody.options;
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
@@ -58,7 +58,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to create new highscore', done => {
+    it('should return 400 and options.mode invalid error', done => {
       delete highscoreBody.options.mode;
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
@@ -67,7 +67,7 @@ module.exports = function(chai) {
       });
     });
 
-    it('should not be able to create new highscore', done => {
+    it('should return 400 and options.dimension invalid error ', done => {
       highscoreBody.options.dimension = 6;
       chai.request(global.app).post('/highscore').send(highscoreBody).set('x-access-token', token).end((err, res) => {
         res.should.have.status(400);
