@@ -87,23 +87,6 @@
         }
       }
     },
-    "/users": {
-      "get": {
-        "tags": ["[users]"],
-        "summary": "gets all users",
-        "parameters": [
-          { "$ref": "#/parameters/x-access-token" }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/responses/users"
-          },
-          "401": {
-            "$ref": "#/responses/unauthorized"
-          }
-        }
-      }
-    },
     "/user/register": {
       "post": {
         "tags": ["[users]"],
@@ -143,6 +126,49 @@
           },
           "400": {
             "$ref": "#/responses/wrongCredentials"
+          }
+        }
+      }
+    },
+    "/user/{username}": {
+      "post": {
+        "tags": ["[users]"],
+        "summary": "updates existing user's field with new value",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "description": "username",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated user object",
+            "schema": {
+              "$ref": "#/schemas/User-no-password"
+            }
+          },
+          "400": {
+            "description": "no user object found"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["[users]"],
+        "summary": "gets all users",
+        "parameters": [
+          { "$ref": "#/parameters/x-access-token" }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/users"
+          },
+          "401": {
+            "$ref": "#/responses/unauthorized"
           }
         }
       }
@@ -225,7 +251,7 @@
   "schemas": {
     "User": {
       "title": "User",
-      "required": ["_id", "registeredAt", "username", "password", "uiState"],
+      "required": ["_id", "registeredAt", "username", "password"],
       "properties": {
         "_id": {
           "$ref": "#/schemas/userId"
@@ -239,9 +265,6 @@
         },
         "password": {
           "type": "string"
-        },
-        "uiState": {
-          "type": "object"
         }
       }
     },
@@ -258,9 +281,6 @@
         },
         "username": {
           "$ref": "#/schemas/username"
-        },
-        "uiState": {
-          "type": "object"
         }
       }
     },
