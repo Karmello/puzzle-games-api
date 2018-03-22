@@ -225,7 +225,7 @@
   "schemas": {
     "User": {
       "title": "User",
-      "required": ["_id", "registeredAt", "username", "password"],
+      "required": ["_id", "registeredAt", "username", "password", "uiState"],
       "properties": {
         "_id": {
           "$ref": "#/schemas/userId"
@@ -239,6 +239,9 @@
         },
         "password": {
           "type": "string"
+        },
+        "uiState": {
+          "type": "object"
         }
       }
     },
@@ -255,6 +258,9 @@
         },
         "username": {
           "$ref": "#/schemas/username"
+        },
+        "uiState": {
+          "type": "object"
         }
       }
     },

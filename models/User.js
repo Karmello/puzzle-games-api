@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'is required'],
     validate: [stringValidators.noMultipleWords, stringValidators.length(8, 25)]
+  },
+  uiState: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true
   }
 }, { versionKey: false });
 
