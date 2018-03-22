@@ -27,10 +27,6 @@ const GameSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  link: {
-    type: String,
-    required: true
-  },
   options: {}
 }, { versionKey: false });
 
