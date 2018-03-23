@@ -5,14 +5,9 @@
 * [Mocha](https://mochajs.org) | [Chai](http://chaijs.com)
 * [Swagger](https://swagger.io)
 <br /><br />
-## Local setup
-* make sure you have `Node.js` and `MongoDB` installed on your system
-* create `mongod` instance
-* `git clone` repo and `npm install` from root
-* `run db-dev-reset` to create and populate database
-* `run db-dev-import-prod <username> <password>` if you wanna import production db data to your local db
-* `nodemon server.js` & navigate to `localhost:3001`
-* `npm test` to run tests
+## Tools
+* Jenkins - [http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
+* ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games](https://app.zenhub.com/workspace/o/karmello/puzzle-games)
 <br /><br />
 ## Remote environments
 * STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
@@ -23,6 +18,5 @@
 * host - `ds155218.mlab.com`
 * port - `55218`
 <br /><br />
-## Other links
-* Jenkins - [http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
-* ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games](https://app.zenhub.com/workspace/o/karmello/puzzle-games)
+## Read more
+* [Wiki](https://github.com/Karmello/puzzle-games-api/wiki)
