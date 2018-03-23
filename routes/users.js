@@ -61,10 +61,29 @@ module.exports = function(router) {
     });
   });
 
+  router.post('/user/:username', checkAuthorization, (req, res) => {
+    const findQuery = { username: req.params.username };
+    User.update(findQuery, req.body).then(() => {
+      User.findOne(findQuery).then(user => {
+        if (user) {
+          res.send(user);
+        } else {
+          res.status(400);
+          res.send('No user object');
+        }
+      });
+    });
+  });
+
   router.get('/users', checkAuthorization, (req, res, next) => {
     User.find({}, (err, users) => {
       if (err) return next(err);
-      if (users) { res.send(users); }
+      if (users) {
+        res.send(users);
+      } else {
+        res.status(400);
+        res.send('No users array');
+      }
     });
   });
 }
