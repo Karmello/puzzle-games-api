@@ -10,7 +10,7 @@ module.exports = function(chai) {
 
     before(done => {
       process.env.HIGHSCORES_LIMIT = 3;
-      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({ id: 'BossPuzzle' })]).then(responses => {
+      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({ id: 'boss-puzzle' })]).then(responses => {
         newHighscore.gameId = responses[2].id;
         newHighscore.options = { mode: 'NUM', dimension: '3' };
         const tasks = [];

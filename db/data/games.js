@@ -1,6 +1,6 @@
 const gamesData = [
   {
-    'id' : 'BossPuzzle',
+    'id' : 'boss-puzzle',
     'categoryId' : 'sliding',
     'name' : 'Boss Puzzle',
     'description' : 'This is a sliding puzzle that consists of a frame of square tiles in random order with one tile missing. Also called Gem Puzzle or Mystic Square.',
@@ -18,7 +18,7 @@ const gamesData = [
     'info' : 'The aim of the game is to get all square tiles back in order, either so that the picture is restored or so that the numbers are in numerical order from left to right, top to bottom with the space at the bottom right.'
   },
   {
-    'id' : 'EightQueens',
+    'id' : 'eight-queens',
     'categoryId' : 'chess',
     'name' : 'Eight Queens',
     'description' : 'The eight queens puzzle is the problem of placing eight chess queens on an 8×8 chessboard so that no two queens threaten each other.',
