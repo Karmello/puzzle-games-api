@@ -13,10 +13,5 @@
 * STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
 * TEST - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
 <br /><br />
-## Remote databases
-* names - `staging-puzzle-games`, `test-puzzle-games`, `puzzle-games`
-* host - `ds155218.mlab.com`
-* port - `55218`
-<br /><br />
 ## Read more
 * [Wiki](https://github.com/Karmello/puzzle-games-api/wiki)
