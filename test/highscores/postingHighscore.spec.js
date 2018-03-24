@@ -5,7 +5,7 @@ module.exports = function(chai) {
     let token, highscoreBody;
 
     beforeEach(done => {
-      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({ id: 'BossPuzzle' })]).then(res => {
+      Promise.all([User.remove({}), Highscore.remove({}), Game.findOne({ id: 'boss-puzzle' })]).then(res => {
         const game = res[2];
         chai.request(global.app).post('/user/register').send({ username: 'AlanWatts', password: 'password' }).end((err, res) => {
           token = res.body.token;
