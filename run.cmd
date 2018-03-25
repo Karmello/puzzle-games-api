@@ -24,7 +24,7 @@ if "%1" == "db" (
     SET TO=%REMOTE_ADDRESS%
     cmd /c mongodump -h %FROM% -d %LOCAL_DB% -o %FOLDER%
     cmd /c mongo %TO%/%REMOTE_DB% -u %4 -p %5 --eval "db.dropDatabase()"
-    cmd /c mongorestore -h %TO% -d %REMOTE_DB% -u %4 -p %5 %FOLDER%/%DB%
+    cmd /c mongorestore -h %TO% -d %REMOTE_DB% -u %4 -p %5 %FOLDER%/%LOCAL_DB%
   )
 
   if "%2" == "reset" (
@@ -33,11 +33,11 @@ if "%1" == "db" (
       cmd /c mongo %LOCAL_ADDRESS%/%LOCAL_DB% < "db/reset.js"
     )
 
-    if "%3" == "staging" SET remote=1
-    if "%3" == "test" SET remote=1
-    if "%3" == "prod" SET remote=1
+    if "%3" == "staging" SET remote="yes"
+    if "%3" == "test" SET remote="yes"
+    if "%3" == "prod" SET remote="yes"
     
-    if %remote% == 1 (
+    if %remote% == "yes" (
       cmd /c mongo %REMOTE_ADDRESS%/%REMOTE_DB% -u %4 -p %5 < "db/reset.js"
     )
   )
