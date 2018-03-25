@@ -1,29 +1,44 @@
 @echo off
 
-if "%1" == "db-dev-reset" (
-  cmd /c "mongo localhost:27017/puzzle-games < db/reset.js"
-)
+if "%1" == "db" (
 
-if "%1" == "db-test-reset" (
-  cmd /c "mongo ds155218.mlab.com:55218/test-puzzle-games -u %2 -p %3 < db/reset.js"
-)
+  SET LOCAL_ADDRESS="localhost:27017"
+  SET REMOTE_ADDRESS="ds155218.mlab.com:55218"
+  SET LOCAL_DB="puzzle-games"
+  SET FOLDER="C:/mongodump"
 
-if "%1" == "db-dev-export" (
-  cmd /c "mongodump -h localhost:27017 -d puzzle-games -o C:/mongodump"
-)
+  if "%3" == "staging" SET REMOTE_DB="staging-puzzle-games"
+  if "%3" == "test" SET REMOTE_DB="test-puzzle-games"
+  if "%3" == "prod" SET REMOTE_DB="puzzle-games"
 
-if "%1" == "db-dev-import-local" (
-  cmd /c "mongo puzzle-games --eval db.dropDatabase()"
-  cmd /c "mongorestore -h localhost:27017 -d puzzle-games C:/mongodump/puzzle-games"
-)
+  if "%2" == "import" (
+    SET FROM=%REMOTE_ADDRESS%
+    SET TO=%LOCAL_ADDRESS%
+    cmd /c mongodump -h %FROM% -d %REMOTE_DB% -u %4 -p %5 -o %FOLDER%
+    cmd /c mongo %LOCAL_DB% --eval "db.dropDatabase()"
+    cmd /c mongorestore -h %TO% -d %LOCAL_DB% %FOLDER%/%LOCAL_DB%
+  )
 
-if "%1" == "db-dev-import-prod" (
-  cmd /c "mongo puzzle-games --eval db.dropDatabase()"
-  cmd /c "mongodump -h ds155218.mlab.com:55218 -d puzzle-games -u %2 -p %3 -o C:/mongodump"
-  cmd /c "mongorestore -h localhost:27017 -d puzzle-games C:/mongodump/puzzle-games"
-)
+  if "%2" == "export" (
+    SET FROM=%LOCAL_ADDRESS%
+    SET TO=%REMOTE_ADDRESS%
+    cmd /c mongodump -h %FROM% -d %LOCAL_DB% -o %FOLDER%
+    cmd /c mongo %TO%/%REMOTE_DB% -u %4 -p %5 --eval "db.dropDatabase()"
+    cmd /c mongorestore -h %TO% -d %REMOTE_DB% -u %4 -p %5 %FOLDER%/%DB%
+  )
 
-if "%1" == "db-prod-import-local" (
-  cmd /c "mongo ds155218.mlab.com:55218/puzzle-games -u %2 -p %3 --eval db.dropDatabase()"
-  cmd /c "mongorestore -h ds155218.mlab.com:55218 -d puzzle-games -u %2 -p %3 C:/mongodump/puzzle-games"
+  if "%2" == "reset" (
+    
+    if "%3" == "local" (
+      cmd /c mongo %LOCAL_ADDRESS%/%LOCAL_DB% < "db/reset.js"
+    )
+
+    if "%3" == "staging" SET remote=1
+    if "%3" == "test" SET remote=1
+    if "%3" == "prod" SET remote=1
+    
+    if %remote% == 1 (
+      cmd /c mongo %REMOTE_ADDRESS%/%REMOTE_DB% -u %4 -p %5 < "db/reset.js"
+    )
+  )
 )
