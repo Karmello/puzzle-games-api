@@ -6,12 +6,12 @@
 * [Swagger](https://swagger.io)
 <br /><br />
 ## Remote environments
-* STAGING - [https://staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
-* TEST - [https://test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
+* STAGING - [staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
+* TEST - [test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
 <br /><br />
 ## Other tools
-* ZenHub - [https://app.zenhub.com/workspace/o/karmello/puzzle-games](https://app.zenhub.com/workspace/o/karmello/puzzle-games)
-* Jenkins - [http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
+* ZenHub - [app.zenhub.com/workspace/o/karmello/puzzle-games](https://app.zenhub.com/workspace/o/karmello/puzzle-games)
+* Jenkins - [ec2-35-158-121-12.eu-central-1.compute.amazonaws.com](http://ec2-35-158-121-12.eu-central-1.compute.amazonaws.com)
 <br /><br />
 ## Read more
 * [Wiki](https://github.com/Karmello/puzzle-games-api/wiki)
