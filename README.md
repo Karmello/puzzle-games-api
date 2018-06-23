@@ -7,7 +7,6 @@
 <br /><br />
 ## Remote environments
 * STAGING - [staging-puzzle-games-api.herokuapp.com](https://staging-puzzle-games-api.herokuapp.com)
-* TEST - [test-puzzle-games-api.herokuapp.com](https://test-puzzle-games-api.herokuapp.com)
 <br /><br />
 ## Other tools
 * ZenHub - [app.zenhub.com/workspace/o/karmello/puzzle-games](https://app.zenhub.com/workspace/o/karmello/puzzle-games)
