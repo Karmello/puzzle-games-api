@@ -1,12 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-
 module.exports = function(req, res, next) {
 
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-  new Promise((resolve, reject) => {
-  
+  new Promise((resolve, reject) => {  
     if (!token) {
       reject();
 
