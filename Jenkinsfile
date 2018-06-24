@@ -1,3 +1,4 @@
+Jenkinsfile (Scripted Pipeline)
 node {
    
    ansiColor('xterm') {
@@ -6,6 +7,8 @@ node {
 
          stage('Build on Heroku') {
          
+            // sh('printenv')
+
             withCredentials([
                usernamePassword(credentialsId: 'GitHubCredentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD'),
                usernamePassword(credentialsId: 'HerokuCredentials', usernameVariable: 'HEROKU_USERNAME', passwordVariable: 'HEROKU_PASSWORD')
@@ -13,8 +16,8 @@ node {
 
                sh('git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/Karmello/puzzle-games-api.git .')
                sh('git config --global push.default matching')
-               sh('git checkout staging')
-               sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git')
+               sh('git checkout $ghprbSourceBranch')
+               sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
             }
          }
          
