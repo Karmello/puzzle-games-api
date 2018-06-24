@@ -1,7 +1,5 @@
 node {
    
-   checkout scm
-
    ansiColor('xterm') {
       
       try {
