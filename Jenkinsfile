@@ -34,6 +34,9 @@ node {
             dir(pwd()) {
                deleteDir()
             }
+            dir(pwd() + '@script') {
+               deleteDir()
+            }
          }
       }
    }
