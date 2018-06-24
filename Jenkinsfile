@@ -1,6 +1,7 @@
-Jenkinsfile (Scripted Pipeline)
 node {
    
+   checkout scm
+
    ansiColor('xterm') {
       
       try {
