@@ -16,7 +16,7 @@ node {
                // sh('git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/Karmello/puzzle-games-api.git .')
                // sh('git config --global push.default matching')
                sh('cd ../staging-puzzle-games-api@script')
-               sh('echo pwd')
+               sh('pwd')
                sh('git checkout $ghprbSourceBranch')
                sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
             }
