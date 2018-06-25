@@ -34,12 +34,11 @@ node {
       } finally {
 
          stage('Clean up') {
-            dir(pwd() + '@script') {
-               deleteDir()
-            }
-            dir(pwd() + '@script@tmp') {
-               deleteDir()
-            }
+
+            dir(pwd()) { deleteDir() }
+            dir(pwd() + '@tmp') { deleteDir() }
+            dir(pwd() + '@script') { deleteDir() }
+            dir(pwd() + '@script@tmp') { deleteDir() }
          }
       }
    }
