@@ -22,7 +22,7 @@ node {
 
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
-                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/${herokuAppName}.git $ghprbSourceBranch:master')
+                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/' + herokuAppName + '.git $ghprbSourceBranch:master')
                }
             }
          }
