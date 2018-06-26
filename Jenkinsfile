@@ -4,27 +4,29 @@ node {
       
       try {
 
+         String herokuAppName = 'puzzle-games-api'
+
+         if ($ghprbSourceBranch !== 'staging') {
+            herokuAppName = 'staging-' + herokuAppName
+         }
+
          stage('Build on Heroku') {
-         
-            // sh('printenv')
 
-            withCredentials([
-               usernamePassword(credentialsId: 'GitHubCredentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD'),
-               usernamePassword(credentialsId: 'HerokuCredentials', usernameVariable: 'HEROKU_USERNAME', passwordVariable: 'HEROKU_PASSWORD')
-            ]) {
-
-               // sh('git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/Karmello/puzzle-games-api.git .')
-               // sh('git config --global push.default matching')
+            withCredentials([usernamePassword(
+               credentialsId: 'HerokuCredentials',
+               usernameVariable: 'HEROKU_USERNAME',
+               passwordVariable: 'HEROKU_PASSWORD'
+            )]) {
                
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
-                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
+                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/$herokuAppName.git $ghprbSourceBranch:master')
                }
             }
          }
          
          stage('Test on Heroku') {
-            sh('heroku run "npm test" -a staging-puzzle-games-api')
+            sh('heroku run "npm test" -a $herokuAppName')
          }
       
       } catch(ex) {
