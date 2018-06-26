@@ -4,7 +4,7 @@ node {
       
       try {
 
-         stage('Build on Heroku') {
+         stage('Deploy to Heroku - staging') {
          
             withCredentials([usernamePassword(
                credentialsId: 'HerokuCredentials',
@@ -18,9 +18,18 @@ node {
                }
             }
          }
-         
-         stage('Test on Heroku') {
+
+         stage('Test on Heroku - staging') {
             sh('heroku run "npm test" -a staging-puzzle-games-api')
+         }
+
+         if (env.ghprbSourceBranch == 'staging') {
+            stage('Deploy to Heroku - master') {
+               dir(pwd() + '@script') {
+                  sh('git checkout staging')
+                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
+               }
+            }
          }
       
       } catch(ex) {
