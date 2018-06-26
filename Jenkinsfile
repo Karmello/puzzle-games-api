@@ -10,9 +10,6 @@ node {
             herokuAppName = 'staging-' + herokuAppName
          }
 
-         echo '$ghprbSourceBranch'
-         echo herokuAppName
-
          stage('Build on Heroku') {
 
             withCredentials([usernamePassword(
@@ -23,7 +20,7 @@ node {
                
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
-                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/$herokuAppName.git $ghprbSourceBranch:master')
+                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/${herokuAppName}.git $ghprbSourceBranch:master')
                }
             }
          }
