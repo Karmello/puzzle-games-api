@@ -18,8 +18,6 @@ node {
                passwordVariable: 'HEROKU_PASSWORD'
             )]) {
                
-               echo herokuAppName
-
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
                   sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/' + herokuAppName + '.git $ghprbSourceBranch:master')
@@ -28,7 +26,7 @@ node {
          }
          
          stage('Test on Heroku') {
-            sh('heroku run "npm test" -a $herokuAppName')
+            sh('heroku run "npm test" -a ' + herokuAppName)
          }
       
       } catch(ex) {
