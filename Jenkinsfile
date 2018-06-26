@@ -6,7 +6,9 @@ node {
 
          String herokuAppName = 'puzzle-games-api'
 
-         if ('$ghprbSourceBranch' != 'staging') {
+         echo env.ghprbSourceBranch
+
+         if (env.ghprbSourceBranch != 'staging') {
             herokuAppName = 'staging-' + herokuAppName
          }
 
