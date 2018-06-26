@@ -10,19 +10,19 @@ node {
 
          try {
 
-            stage('Deploy to Heroku - staging') {
+            stage('Deploy to STAGING') {
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
                   sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
                }
             }
 
-            stage('Test on Heroku - staging') {
+            stage('Test on STAGING') {
                sh('heroku run "npm test" -a staging-puzzle-games-api')
             }
 
             if (env.ghprbSourceBranch == 'staging') {
-               stage('Deploy to Heroku - master') {
+               stage('Deploy to MASTER') {
                   dir(pwd() + '@script') {
                      sh('git checkout staging')
                      sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
