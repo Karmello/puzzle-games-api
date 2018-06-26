@@ -10,6 +10,9 @@ node {
             herokuAppName = 'staging-' + herokuAppName
          }
 
+         echo '$ghprbSourceBranch'
+         echo herokuAppName
+
          stage('Build on Heroku') {
 
             withCredentials([usernamePassword(
