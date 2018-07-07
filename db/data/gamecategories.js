@@ -6,6 +6,10 @@ const gamecategoriesData = [
   {
     id: 'chess',
     name: 'Chess'
+  },
+  {
+    id: 'logic',
+    name: 'Logic'
   }
 ];
 
