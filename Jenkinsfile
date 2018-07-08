@@ -18,7 +18,7 @@ node {
             }
 
             stage('Test on STAGING') {
-               sh('heroku run "npm test" -a staging-puzzle-games-api')
+               sh('heroku run "npm test" -a staging-puzzle-games-api --exit-code')
             }
 
             if (env.ghprbSourceBranch == 'staging') {
