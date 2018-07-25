@@ -13,7 +13,7 @@ node {
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
                   sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
-                  sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
+                  sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
                }
             }
 
