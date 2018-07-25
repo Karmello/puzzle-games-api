@@ -26,7 +26,7 @@ node {
                   dir(pwd() + '@script') {
                      sh('git checkout staging')
                      sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
-                     sh('mongo ds155218.mlab.com:55218/puzzle-games -u $MLAB_USERNAME -p MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
+                     sh('mongo ds155218.mlab.com:55218/puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
                   }
                }
             }
