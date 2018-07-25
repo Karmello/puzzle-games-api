@@ -5,6 +5,7 @@ module.exports = function(req, res, next) {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
   new Promise((resolve, reject) => {  
+    
     if (!token) {
       reject();
 
@@ -20,6 +21,7 @@ module.exports = function(req, res, next) {
     next();
 
   }, () => {
+    
     if (req.route.path === '/user/login') {
       next();
     } else {
