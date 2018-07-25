@@ -2,11 +2,10 @@ node {
    
    ansiColor('xterm') {
       
-      withCredentials([usernamePassword(
-         credentialsId: 'HerokuCredentials',
-         usernameVariable: 'HEROKU_USERNAME',
-         passwordVariable: 'HEROKU_PASSWORD'
-      )]) {
+      withCredentials([
+         usernamePassword(credentialsId: 'HerokuCredentials', usernameVariable: 'HEROKU_USERNAME', passwordVariable: 'HEROKU_PASSWORD'),
+         usernamePassword(credentialsId: 'mLabCredentials', usernameVariable: 'MLAB_USERNAME', passwordVariable: 'MLAB_PASSWORD')
+      ]) {
 
          try {
 
@@ -14,6 +13,7 @@ node {
                dir(pwd() + '@script') {
                   sh('git checkout $ghprbSourceBranch')
                   sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
+                  sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
                }
             }
 
@@ -26,6 +26,7 @@ node {
                   dir(pwd() + '@script') {
                      sh('git checkout staging')
                      sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
+                     sh('mongo ds155218.mlab.com:55218/puzzle-games -u $MLAB_USERNAME -p MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
                   }
                }
             }

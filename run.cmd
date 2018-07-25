@@ -22,10 +22,6 @@ if %1 == db (
     SET REMOTE_DB=staging-puzzle-games
     SET remote=yes
   )
-  if %3 == test (
-    SET REMOTE_DB=test-puzzle-games
-    SET remote=yes
-  )
   if %3 == prod (
     SET REMOTE_DB=puzzle-games
     SET remote=yes
