@@ -5,15 +5,8 @@ const gamesData = [
     name : 'Boss Puzzle',
     description : 'This is a sliding puzzle that consists of a frame of square tiles in random order with one tile missing. Also called Gem Puzzle or Mystic Square.',
     options : {
-      mode : [ 
-        'NUM', 
-        'IMG'
-      ],
-      dimension : [
-        '3', 
-        '4', 
-        '5'
-      ]
+      mode : ['NUM', 'IMG'],
+      dimension : ['3', '4', '5']
     },
     info : 'The aim of the game is to get all square tiles back in order, either so that the picture is restored or so that the numbers are in numerical order from left to right, top to bottom with the space at the bottom right.'
   },
@@ -38,7 +31,9 @@ const gamesData = [
     categoryId: 'chess',
     name: 'Knight\'s Tour',
     description: 'A knight\'s tour is a sequence of moves of a knight on a chessboard such that the knight visits every square only once.',
-    options: {},
+    options: {
+      dimension : ['5', '8']
+    },
     info: 'The task is to move a knight across the chess board by standard knight moves. The only restriction is that the knight cannot visit the same square twice. The puzzle is said to be completed if the knight visited all squares on the board.'
   }
 ];
