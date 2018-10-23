@@ -9,25 +9,34 @@ node {
 
          try {
 
-            stage('Deploy to STAGING') {
-               dir(pwd() + '@script') {
-                  sh('git checkout $ghprbSourceBranch')
-                  sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
-                  sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
+            // deploying from feature to staging
+            if (env.ghprbSourceBranch != 'staging') {
+
+               stage('Deploy to STAGING') {
+                  dir(pwd() + '@script') {
+                     sh('git checkout $ghprbSourceBranch')
+                     sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
+                     sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
+                  }
                }
-            }
 
-            stage('Test on STAGING') {
-               sh('heroku run "npm test" -a staging-puzzle-games-api --exit-code')
-            }
+               stage('Test on STAGING') {
+                  sh('heroku run "npm test" -a staging-puzzle-games-api --exit-code')
+               }
 
-            if (env.ghprbSourceBranch == 'staging') {
+            // deploying from staging to master
+            } else if (env.ghprbSourceBranch == 'staging') {
+
                stage('Deploy to MASTER') {
                   dir(pwd() + '@script') {
                      sh('git checkout staging')
                      sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
                      sh('mongo ds155218.mlab.com:55218/puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
                   }
+               }
+
+               stage('Test on MASTER') {
+                  sh('heroku run "npm test" -a puzzle-games-api --exit-code')
                }
             }
       
