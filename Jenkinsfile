@@ -36,7 +36,7 @@ node {
                }
 
                stage('Test on MASTER') {
-                  sh('heroku run "npm test" -a puzzle-games-api --exit-code')
+                  sh('heroku run "CI=true npm test" -a puzzle-games-api --exit-code')
                }
             }
       
