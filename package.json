@@ -1,6 +1,6 @@
 {
   "name": "puzzle-games-api",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "api for puzzle games react ui",
   "main": "server.js",
   "scripts": {
