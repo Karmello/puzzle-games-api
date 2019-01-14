@@ -1,5 +1,9 @@
 const gamecategoriesData = [
   {
+    id: 'all',
+    name: 'All'
+  },
+  {
     id: 'sliding',
     name: 'Sliding'
   },
