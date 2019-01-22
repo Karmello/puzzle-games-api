@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 
-const router = express.Router();
+const router = express.Router({});
 require('./routes')(router);
 
 const { NODE_ENV, MONGODB_URI } = process.env;
