@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha --timeout 10000 --exit"
+    "test": "mocha --timeout 10000 --exit",
+    "mongo": "mongod",
+    "resetReadOnlyCollections": "mongo puzzle-games < db/resetReadOnlyCollections.js"
   },
   "author": "Kamil Noga",
   "license": "ISC",

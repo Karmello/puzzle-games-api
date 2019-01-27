@@ -1,33 +1,33 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jasmine": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "process": true,
-        "load": true,
-        "db": true,
-        "before": true,
-        "User": true,
-        "GameCategory": true,
-        "Game": true,
-        "Highscore": true
-    },
-    "rules": {
-        "indent": [
-            "error",
-            2,
-            { "SwitchCase": 1 }
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "no-case-declarations": 0,
-        "no-console": 0,
-        "no-unused-vars": 1
-    }
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jasmine": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "process": true,
+    "load": true,
+    "db": true,
+    "before": true,
+    "User": true,
+    "GameCategory": true,
+    "Game": true,
+    "Highscore": true
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1 }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "no-case-declarations": 0,
+    "no-console": 0,
+    "no-unused-vars": 1
+  }
 }
