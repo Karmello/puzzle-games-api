@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Game = require('./Game');
 
-
-const ObjectId = mongoose.Schema.Types.ObjectId;
 const Mixed = mongoose.Schema.Types.Mixed;
 
 const HighscoreSchema = new mongoose.Schema({
