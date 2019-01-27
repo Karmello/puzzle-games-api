@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const GameCategorySchema = new mongoose.Schema({
   id: {
     type: String,
