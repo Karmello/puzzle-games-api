@@ -40,9 +40,9 @@ const gamesData = [
     id: 'tetris',
     categoryId: 'falling-block',
     name: 'Tetris',
-    description: '...',
+    description: 'Tetris is a game developed in the Soviet Union in 1984. The goal is to drop blocks, called tetrominoes, down into a playing field to make lines.',
     options: {},
-    info: '...'
+    info: 'The goal is to drop blocks, called tetrominoes, down into a playing field to make lines. Tetriminoes are made of four connected squares each. There are seven different types of tetrominoes. Levels have a set goal, or number of lines to clear. When the goal number reaches zero, the player moves to the next level. As the levels go up, the tetrominoes fall faster.'
   }
 ];
 
