@@ -35,6 +35,14 @@ const gamesData = [
     description: 'Sudoku (originally called Number Place) is a logic-based, combinatorial number-placement puzzle.',
     options: {},
     info: 'The objective is to fill a 9×9 grid with digits so that each column, each row, and each of the nine 3×3 subgrids that compose the grid (also called "boxes", "blocks", or "regions") contains all of the digits from 1 to 9.'
+  },
+  {
+    id: 'tetris',
+    categoryId: 'falling-block',
+    name: 'Tetris',
+    description: 'Tetris is a game developed in the Soviet Union in 1984. The goal is to drop blocks, called tetrominoes, down into a playing field to make lines.',
+    options: {},
+    info: 'The goal is to drop blocks, called tetrominoes, down into a playing field to make lines. Tetriminoes are made of four connected squares each. There are seven different types of tetrominoes. Levels have a set goal, or number of lines to clear. When the goal number reaches zero, the player moves to the next level. As the levels go up, the tetrominoes fall faster.'
   }
 ];
 

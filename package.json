@@ -1,11 +1,13 @@
 {
   "name": "puzzle-games-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "api for puzzle games react ui",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha --timeout 10000 --exit"
+    "test": "mocha --timeout 10000 --exit",
+    "mongo": "mongod",
+    "resetReadOnlyCollections": "mongo puzzle-games < db/resetReadOnlyCollections.js"
   },
   "author": "Kamil Noga",
   "license": "ISC",
