@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="790ee1ca-79ec-4efb-b6a0-10d84c798eb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/data/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/data/games.js" afterDir="false" />
-    </list>
+    <list default="true" id="790ee1ca-79ec-4efb-b6a0-10d84c798eb2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,10 +14,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/data/games.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="44" column="152" selection-start-line="44" selection-start-column="152" selection-end-line="44" selection-end-column="152" />
+            <state relative-caret-position="152">
+              <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -206,12 +212,12 @@
       <workItem from="1548610498622" duration="23000" />
       <workItem from="1548621907053" duration="171000" />
       <workItem from="1548622111862" duration="2310000" />
-      <workItem from="1549796504172" duration="300000" />
+      <workItem from="1549796504172" duration="610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8566000" />
+    <option name="totallyTimeSpent" value="8876000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -226,7 +232,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.19597316" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.19597316" />
       <window_info id="Designer" order="1" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Structure" order="3" sideWeight="0.5005417" weight="0.18710022" />
@@ -238,9 +244,9 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.47887325" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" auto_hide="true" id="Event Log" order="8" side_tool="true" weight="0.53737813" />
+      <window_info anchor="bottom" auto_hide="true" id="Event Log" order="8" side_tool="true" weight="0.5368272" />
       <window_info anchor="bottom" auto_hide="true" id="Find" order="9" weight="0.6413868" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="10" weight="0.6435536" />
+      <window_info anchor="bottom" auto_hide="true" id="Run" order="10" weight="0.6430595" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -250,8 +256,8 @@
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" auto_hide="true" id="Favorites" order="8" sideWeight="0.5005417" weight="0.26599148" />
-      <window_info anchor="right" auto_hide="true" id="npm" order="9" sideWeight="0.5005417" weight="0.2531983" />
-      <window_info anchor="right" auto_hide="true" id="Terminal" order="10" weight="0.47228146" />
+      <window_info anchor="right" auto_hide="true" id="npm" order="9" sideWeight="0.5005417" weight="0.25302014" />
+      <window_info anchor="right" auto_hide="true" id="Terminal" order="10" weight="0.47181207" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.1913646" />
@@ -500,17 +506,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/db/data/games.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        <state relative-caret-position="152">
+          <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/data/games.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="44" column="152" selection-start-line="44" selection-start-column="152" selection-end-line="44" selection-end-column="152" />
+        <state relative-caret-position="308">
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
         </state>
       </provider>
     </entry>
