@@ -12,29 +12,29 @@ node {
         // deploying from feature to staging
         if (env.ghprbSourceBranch != 'staging') {
 
-          stage('[STAGING] Checkout $ghprbSourceBranch branch') {
+          stage('Checkout the local feature branch') {
             dir(pwd() + '@script') {
               sh('git checkout $ghprbSourceBranch')
             }
           }
 
-          stage('[STAGING] Push to HEROKU') {
+          stage('Push to staging-puzzle-games-api repo on Heroku') {
             dir(pwd() + '@script') {
               sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/staging-puzzle-games-api.git $ghprbSourceBranch:master')
             }
           }
 
-          stage('[STAGING] Reset database read-only collections') {
+          stage('Reset staging-puzzle-games database read-only collections on mLab') {
             dir(pwd() + '@script') {
               sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
             }
           }
 
-          stage('[STAGING] Test HEROKU build') {
+          stage('Test staging-puzzle-games-api app on Heroku') {
             sh('heroku run "npm test" -a staging-puzzle-games-api --exit-code')
           }
 
-          stage('[STAGING] Reset all database collections') {
+          stage('Reset all staging-puzzle-games database collections on mLab') {
             dir(pwd() + '@script') {
               sh('mongo ds155218.mlab.com:55218/staging-puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/reset.js"')
             }
@@ -43,19 +43,19 @@ node {
         // deploying from staging to master
         } else if (env.ghprbSourceBranch == 'staging') {
 
-          stage('[PROD] Checkout staging branch') {
+          stage('Checkout the local staging branch') {
             dir(pwd() + '@script') {
               sh('git checkout staging')
             }
           }
 
-          stage('[PROD] Push to HEROKU') {
+          stage('Push to puzzle-games-api repo on Heroku') {
             dir(pwd() + '@script') {
               sh('git push -f https://$HEROKU_USERNAME:$HEROKU_PASSWORD@git.heroku.com/puzzle-games-api.git staging:master')
             }
           }
 
-          stage('[PROD] Reset database read-only collections') {
+          stage('Reset puzzle-games database read-only collections on mLab') {
             dir(pwd() + '@script') {
               sh('mongo ds155218.mlab.com:55218/puzzle-games -u $MLAB_USERNAME -p $MLAB_PASSWORD < "db/resetReadOnlyCollections.js"')
             }
