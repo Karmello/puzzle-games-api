@@ -47,7 +47,7 @@ node {
 
           stage('Starting production environment deployment') {}
 
-          stage('Checkout out a branch') {
+          stage('Checking out a branch') {
             dir(pwd() + '@script') {
               sh('git checkout staging')
             }
