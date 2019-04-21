@@ -12,6 +12,8 @@ node {
         // deploying from feature to staging
         if (env.ghprbSourceBranch != 'staging') {
 
+          stage('Starting staging environment deployment') {}
+
           stage('Checking out a branch') {
             dir(pwd() + '@script') {
               sh('git checkout $ghprbSourceBranch')
@@ -43,6 +45,8 @@ node {
         // deploying from staging to master
         } else if (env.ghprbSourceBranch == 'staging') {
 
+          stage('Starting production environment deployment') {}
+
           stage('Checkout out a branch') {
             dir(pwd() + '@script') {
               sh('git checkout staging')
@@ -68,7 +72,7 @@ node {
 
       } finally {
 
-        stage('Clean up') {
+        stage('Cleaning up directories') {
           dir(pwd()) { deleteDir() }
           dir(pwd() + '@tmp') { deleteDir() }
           dir(pwd() + '@script') { deleteDir() }
